@@ -3,12 +3,12 @@ import {Vector3D} from "../../vox/baseEngine/math/Vector3D";
 import {EntityObject} from "../../vox/baseEngine/entity/EntityObject";
 import {RendererContext} from "../../vox/baseEngine/render/RendererContext";
 import {Renderer} from "../../vox/baseEngine/render/Renderer";
-import {CameraCtrl} from "../../vox/baseEngine/view/CameraCtrl";
+import {CameraCtrl} from "./playerOne/ctrl/CameraCtrl";
 
 import {ImageTextureProxy} from "../../vox/baseEngine/texture/ImageTextureProxy";
 import {MaterialBuilder} from "../../vox/baseEngine/material/MaterialBuilder";
 import {Engine} from "../../vox/baseEngine/Engine";
-import {SphereObject} from "../../vox/baseEngine/entity/SphereObject";
+import {SphereObject} from "./playerOne/entity/SphereObject";
 import {AxisEntity} from "../../vox/baseEngine/entity/AxisEntity";
 import {PlaneEntity} from "../../vox/baseEngine/entity/PlaneEntity";
 import {BoxEntity} from "../../vox/baseEngine/entity/BoxEntity";

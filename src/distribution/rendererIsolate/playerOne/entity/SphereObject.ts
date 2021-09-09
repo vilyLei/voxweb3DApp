@@ -1,12 +1,12 @@
 
-import {Vector3D} from "../math/Vector3D";
-import {Renderer} from "../render/Renderer";
-import {ImageTextureProxy} from "../texture/ImageTextureProxy";
-import {ShdCodeMaterial} from "../material/ShdCodeMaterial";
-import {MaterialBuilder} from "../material/MaterialBuilder";
-import {SphereEntity} from "./SphereEntity";
+import {Vector3D} from "../../../../vox/baseEngine/math/Vector3D";
+import {Renderer} from "../../../../vox/baseEngine/render/Renderer";
+import {ImageTextureProxy} from "../../../../vox/baseEngine/texture/ImageTextureProxy";
+import {ShdCodeMaterial} from "../../../../vox/baseEngine/material/ShdCodeMaterial";
+import {MaterialBuilder} from "../../../../vox/baseEngine/material/MaterialBuilder";
+import {SphereEntity} from "../../../../vox/baseEngine/entity/SphereEntity";
 
-import {Engine} from "../Engine";
+import {Engine} from "../../../../vox/baseEngine/Engine";
 
 class SphereObject {
 

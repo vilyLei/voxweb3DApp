@@ -1,8 +1,8 @@
 
-import {Vector3D} from "../math/Vector3D";
-import {Matrix4} from "../math/Matrix4";
-import {Camera} from "../view/Camera";
-import {Engine} from "../Engine";
+import {Vector3D} from "../../../../vox/baseEngine/math/Vector3D";
+import {Matrix4} from "../../../../vox/baseEngine/math/Matrix4";
+import {Camera} from "../../../../vox/baseEngine/view/Camera";
+import {Engine} from "../../../../vox/baseEngine/Engine";
 
 
 class CameraCtrl

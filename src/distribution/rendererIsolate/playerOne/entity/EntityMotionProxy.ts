@@ -1,5 +1,5 @@
-import {Vector3D} from "../math/Vector3D";
-import {EntityObject} from "./EntityObject";
+import {Vector3D} from "../../../../vox/baseEngine/math/Vector3D";
+import {EntityObject} from "../../../../vox/baseEngine/entity/EntityObject";
 
 class EntityMotionProxy
 {
