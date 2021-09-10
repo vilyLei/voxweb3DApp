@@ -8,7 +8,14 @@
   "scripts": {
     "build": "vue-cli-service build --target lib --name VoxApp --dest dist ./src/main.ts",
     "buildvox": "vue-cli-service build --target lib --name VoxApp --dest dist ./src/dev.ts",
-    "buildrplayer": "vue-cli-service build --target lib --name VoxApp --dest dist/player ./src/distribution/rendererIsolate/devPlayerOne.ts",
+
+    "dev_playerOne": "vue-cli-service serve --voxtype=playerOne",
+    "build_playerOne": "vue-cli-service build --target lib --name VoxApp --dest dist/playerOne ./src/playerOne/devApp.ts",
+
+    
+    "dev_box": "vue-cli-service serve --voxtype=box",
+    "build_box": "vue-cli-service build --target lib --name VoxApp --dest dist/box ./src/box/devApp.ts",
+
     "dev": "vue-cli-service serve --type=dev",
     "devvox": "vue-cli-service serve --voxtype=dev"
   },

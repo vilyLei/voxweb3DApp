@@ -5,10 +5,17 @@ const { ENV = '' } = process.env;
 console.log("process.env: ",process.env.npm_lifecycle_script);
 let devDstStr = "./src/main.ts";
 let appDstStr = "./src/main.ts";
-if(process.env.npm_lifecycle_script == "vue-cli-service serve --voxtype=dev")
+
+let keyStr = "--voxtype=";
+let compileParam = process.env.npm_lifecycle_script + "";
+let keyIndx = compileParam.indexOf(keyStr);
+compileParam = compileParam.slice(keyIndx + keyStr.length);
+console.log("compileParam: ",compileParam);
+//if(process.env.npm_lifecycle_script == "vue-cli-service serve --voxtype=dev")
+if(keyIndx > 0 && compileParam != "")
 {
-  devDstStr = "./src/dev.ts";
-  appDstStr = "./src/dev.ts";
+  devDstStr = "./src/"+compileParam+"/dev.ts";
+  appDstStr = devDstStr;
 }
 module.exports = {
   pages: {
