@@ -17,12 +17,37 @@ class App implements IApp{
     private m_degZ: number = 0.0;
     constructor() { }
 
+    private initEvt(): void {
+        
+        document.onmousedown = (evt:any): void =>
+        {
+            let pwindow: any = window;
+            var VoxCore = pwindow["VoxCore"];
+            let loader: any = VoxCore["voxAppModuleLoader"];
+            //"oscillator": "static/code/apps/demos/oscillator.js"
+            //load(purl: string, loadedFunc: () => void, name: string, className: string): void
+            loader.load(
+                "static/code/apps/demos/oscillator.js",
+                ():void=>{
+                    console.log("load oscillator module ok.");
+                    let oscillator = new VoxCore["oscillatorApp"]();
+                    oscillator.initialize(VoxCore);
+                },
+                "oscillator",
+                "oscillatorApp"
+            );
+            console.log("Mouse Event App Mouse Down...");
+        }
+    }
     initialize(module: any): void {
 
         if (this.m_initFlag) {
-            
+
+            console.log("MouseEvent module initialize...");
             this.m_initFlag = false;
             this.m_engine.initialize();
+
+            this.initEvt();
 
             let tex: ImageTextureProxy = new Engine.ImageTextureProxy(64, 64);
             let img: HTMLImageElement = new Image();
@@ -52,11 +77,12 @@ class App implements IApp{
             this.m_engine.run();
         }
     }
+    
     getModuleName():string {
-        return "box";
+        return "mouseEvent";
     }
     getModuleClassName():string {
-        return "boxApp";
+        return "mouseEventApp";
     }
     getRuntimeType():string {
         return "default";

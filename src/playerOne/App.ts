@@ -1,10 +1,11 @@
 import {EngineInstance} from "../vox/engine/EngineInstance";
 import {Scene} from "./scene/Scene";
+import { IApp } from "../vox/app/IApp";
 
 /**
  * A 3D APP Demo
  */
-class App {
+class App implements IApp{
 
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
@@ -37,6 +38,16 @@ class App {
             this.m_engine.run();
             // engine rendering end
         }
+    }
+    
+    getModuleName():string {
+        return "box";
+    }
+    getModuleClassName():string {
+        return "boxApp";
+    }
+    getRuntimeType():string {
+        return "default";
     }
 }
 

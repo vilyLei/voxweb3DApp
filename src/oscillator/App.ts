@@ -1,8 +1,8 @@
-
+import { IApp } from "../vox/app/IApp";
 /**
  * A 3D APP Box view Demo
  */
-class App {
+class App implements IApp{
 
     private m_initFlag: boolean = true;
     constructor() { }
@@ -19,6 +19,16 @@ class App {
      */
     run(): void {
 
+    }
+    
+    getModuleName():string {
+        return "oscillator";
+    }
+    getModuleClassName():string {
+        return "oscillatorApp";
+    }
+    getRuntimeType():string {
+        return "default";
     }
 }
 

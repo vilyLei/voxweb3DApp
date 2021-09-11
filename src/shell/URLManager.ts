@@ -1,4 +1,6 @@
 
+
+import { IApp } from "../vox/app/IApp";
 class URLManager {
 
     private m_devTestEnv: boolean = true;
@@ -17,29 +19,42 @@ class URLManager {
         "BaseRenderer",
         "ROFunctions"
     ];
-    private m_index: number = 0;
+    private m_loadIndex: number = 0;
+    private m_loadedIndex: number = 0;
     constructor() { }
 
     getIndex(): number {
-        return this.m_index;
+        return this.m_loadIndex;
+    }
+    loaded(): void {
+        this.m_loadedIndex ++;
     }
     isLoadEnabled(): boolean {
-        return this.m_index < this.m_moduleNameList.length;
+        return this.m_loadIndex < this.m_moduleNameList.length;
+    }
+    isLoadFinish(): boolean {
+        return this.m_loadedIndex >= this.m_moduleNameList.length;
     }
     getModuleName(): string {
-        return this.m_moduleNameList[this.m_index];
+        return this.m_moduleNameList[this.m_loadIndex];
     }
     getModuleClassName(): string {
-        return this.m_moduleClassNameList[this.m_index];
+        return this.m_moduleClassNameList[this.m_loadIndex];
     }
     getModuleUrl(): string {
-        let ns: string = this.m_moduleNameList[this.m_index];
+        let ns: string = this.m_moduleNameList[this.m_loadIndex];
         return this.m_urlsObj[ns];
     }
     useNext(): void {
-        this.m_index ++;
+        this.m_loadIndex ++;
     }
-    initialize(): void {
+
+    initialize(appModule: IApp = null): void {
+        if(appModule != null) {
+            this.m_moduleEnabled = true;
+            this.m_devTestEnv = true;
+            return;
+        }
         this.m_moduleEnabled = false;
         let str: string = location.href + "";
         let params: string[] = str.split("?");

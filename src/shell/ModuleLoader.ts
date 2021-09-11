@@ -64,7 +64,7 @@ export class ModuleLoader {
             this.showLoadInfo(" " + Math.round(100.0 * e.loaded / e.total) + "% ");
         };
         codeLoader.onload = () => {
-
+            
             let scriptEle: HTMLScriptElement = document.createElement("script");
             scriptEle.onerror = (e) => {
                 console.error("module script onerror, e: ", e);

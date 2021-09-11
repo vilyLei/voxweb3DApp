@@ -20,7 +20,12 @@
     "build_primitive": "vue-cli-service build --target lib --name VoxApp --dest dist/primitive ./src/primitive/compile/devApp.ts",
 
     "dev_oscillator": "vue-cli-service serve --voxtype=oscillator",
-    "build_oscillator": "vue-cli-service build --target lib --name VoxApp --dest dist/oscillator ./src/oscillator/compile/devApp.ts"
+    "build_oscillator": "vue-cli-service build --target lib --name VoxApp --dest dist/oscillator ./src/oscillator/compile/devApp.ts",
+
+
+    "dev_mouseEvent": "vue-cli-service serve --voxtype=mouseEvent",
+    "build_mouseEvent": "vue-cli-service build --target lib --name VoxApp --dest dist/mouseEvent ./src/mouseEvent/compile/devApp.ts"
+  
   },
   "dependencies": {
     "@tweenjs/tween.js": "^18.4.2",

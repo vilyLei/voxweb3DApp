@@ -1,4 +1,5 @@
 
+import { IApp } from "../../vox/app/IApp";
 import {App} from "../App";
 import {URLManager} from "../URLManager";
 import {ModuleLoader} from "../ModuleLoader";
@@ -13,7 +14,6 @@ export class Shell {
 
     private m_inited: boolean = true;
     private m_module: any = null;
-    private m_appModuleName: string = "";
     private m_loadFlag: boolean = true;
     
     private m_moduleInsList: any[] = [];
@@ -37,6 +37,7 @@ export class Shell {
 
     private loadedMana(module_ns: string, className: string): void {
 
+        this.m_urlManager.loaded();
         let pwindow: any = window;
         var VoxCore = pwindow.VoxCore;
         console.log("module build success, module name: ",module_ns);
@@ -47,8 +48,7 @@ export class Shell {
             
             let noduleIns = new VoxCore[className]();
             this.m_moduleInsList.push( noduleIns );
-            let initEnabled: boolean = this.m_appModuleName == module_ns;
-            console.log("initEnabled, module_ns: ",module_ns,this.m_appModuleName);
+            let initEnabled: boolean = this.m_urlManager.isLoadFinish();
             if( initEnabled ) {
                 this.initModules(VoxCore);
             }
@@ -76,6 +76,10 @@ export class Shell {
 
         this.m_moduleLoader.loadFinish();
 
+        if(this.m_appModule != null) {
+            this.m_moduleInsList.push( this.m_appModule );
+        }
+        
         let mainModule = new module["BaseRenderer"]();
         mainModule.initialize();
         module["mainModule"] = mainModule;
@@ -89,18 +93,19 @@ export class Shell {
             this.m_moduleInsList[i].initialize( module );
         }
     }
-    initialize(): void {
+    private m_appModule: IApp = null;
+    initialize(appModule: IApp = null): void {
         if(this.m_inited) {
+            this.m_appModule = appModule;
             this.m_inited = false;
             console.log("location.href: ",location.href);
             console.log("Shell::initialize()......navigator.language: ",navigator.language);
             
-            this.m_urlManager.initialize();
+            this.m_urlManager.initialize(appModule);
             if(this.m_urlManager.isModuleEnabled()) {
                 
                 var VoxCore = pwindow["VoxCore"];
                 VoxCore["voxAppModuleLoader"] = this.m_moduleLoader;
-                this.m_appModuleName = this.m_urlManager.getAppModuleName();
                 this.initConfigure();
             }
 
