@@ -7,50 +7,22 @@ import { BoxEntity } from "../vox/engine/entity/BoxEntity";
 /**
  * A 3D APP Box view Demo
  */
-class App implements IApp {
+class App implements IApp{
 
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
-    private m_fpsModule: IApp = null;
 
     private m_box: BoxEntity;
     private m_degY: number = 0.0;
     private m_degZ: number = 0.0;
     constructor() { }
 
-    private initEvt(): void {
-        
-        document.onmousedown = (evt:any): void =>
-        {
-            let pwindow: any = window;
-            var VoxCore = pwindow["VoxCore"];
-            let loader: any = VoxCore["voxAppModuleLoader"];
-            //let moduleNS: string = "oscillator";
-            let moduleNS: string = "fps";
-            //"oscillator": "static/code/apps/demos/oscillator.js"
-            //load(purl: string, loadedFunc: () => void, name: string, className: string): void
-            loader.load(
-                "static/code/apps/demos/"+moduleNS+".js",
-                ():void=>{
-                    console.log("load oscillator module ok.");
-                    this.m_fpsModule = new VoxCore[moduleNS + "App"]();
-                    this.m_fpsModule.initialize(VoxCore);
-                },
-                moduleNS,
-                moduleNS + "App"
-            );
-            console.log("Mouse Event App Mouse Down...");
-        }
-    }
     initialize(module: any): void {
 
         if (this.m_initFlag) {
-
-            console.log("MouseEvent module initialize...");
+            
             this.m_initFlag = false;
             this.m_engine.initialize();
-
-            this.initEvt();
 
             let tex: ImageTextureProxy = new Engine.ImageTextureProxy(64, 64);
             let img: HTMLImageElement = new Image();
@@ -69,9 +41,7 @@ class App implements IApp {
      * running per frame
      */
     run(): void {
-        if(this.m_fpsModule != null) {
-            this.m_fpsModule.run();
-        }
+
         if (this.m_engine != null) {
 
             this.m_degY += 1.0;
@@ -82,12 +52,11 @@ class App implements IApp {
             this.m_engine.run();
         }
     }
-    
     getModuleName():string {
-        return "mouseEvent";
+        return "box";
     }
     getModuleClassName():string {
-        return "mouseEventApp";
+        return "boxApp";
     }
     getRuntimeType():string {
         return "default";
