@@ -13,6 +13,7 @@ import { BoxFrameEntity } from "../vox/engine/entity/BoxFrameEntity";
 import { DashedLineEntity } from "../vox/engine/entity/DashedLineEntity";
 
 import { CameraCtrl } from "../common/ctrl/CameraCtrl";
+import { LineEntity } from "../vox/engine/entity/LineEntity";
 
 /**
  * primitive objects display Scene
@@ -92,11 +93,19 @@ class Scene implements IScene {
         boxFrame.initialize(new Engine.Vector3D(-size, -size, -size), new Engine.Vector3D(size, size, size));
         boxFrame.setRGB3f(Math.random(), Math.random(), Math.random());
         this.m_engine.addEntity(boxFrame);
-
-        let ls: DashedLineEntity = new DashedLineEntity();
-        ls.initializeLS(new Engine.Vector3D(), new Engine.Vector3D(100,0,100));
-        ls.setXYZ(0, 400, 0);
+        
+        let ls: LineEntity = new LineEntity();
+        ls.color.setRGB3f(1.0,0.0,0.0);
+        ls.initialize(new Engine.Vector3D(), new Engine.Vector3D(-100,0,-100));
+        
+        ls.setXYZ(0, 300, 0);
         this.m_engine.addEntity(ls);
+
+        let dashedLS: DashedLineEntity = new DashedLineEntity();
+        dashedLS.initializeLS(new Engine.Vector3D(), new Engine.Vector3D(100,0,100));
+        dashedLS.setXYZ(0, 400, 0);
+        this.m_engine.addEntity(dashedLS);
+    
     }
 
     run(): void {
