@@ -7,6 +7,8 @@ export class CodeModule {
     private m_className: string = "";
     private m_url: string = "";
 
+    callbackList: (() => void)[] = [];
+
     constructor(status: number, name: string, className: string, url: string) {
         this.m_status = status;
         this.m_name = name;
@@ -27,6 +29,7 @@ export class CodeModule {
         return this.m_status;
     }
 }
+
 export class ModuleLoader {
 
     private m_moduleMap: Map<string, CodeModule> = new Map();
@@ -40,10 +43,14 @@ export class ModuleLoader {
             if(block.getStatus() == 2) {
                 loadedFunc();
             }
+            else {
+                block.callbackList.push( loadedFunc );
+            }
             return;
         }
         console.log("loadJSModule, purl: ", purl);
         block = new CodeModule(0, name, className, purl);
+        block.callbackList.push( loadedFunc );
         this.m_moduleMap.set(name, block);
 
         let codeLoader: XMLHttpRequest = new XMLHttpRequest();
@@ -64,12 +71,12 @@ export class ModuleLoader {
             }
             scriptEle.innerHTML = codeLoader.response;
             document.head.appendChild(scriptEle);
-
-            let block = new CodeModule(2, name, className, purl);
+            let block = this.m_moduleMap.get(name);
+            for(let i: number = 0; i < block.callbackList.length; i++) {
+                (block.callbackList.pop())();
+            }
+            block = new CodeModule(2, name, className, purl);
             this.m_moduleMap.set(name, block);
-
-            //this.loadedMana(module_ns, codeLoader, className);
-            loadedFunc();
         }
         codeLoader.send(null);
     }

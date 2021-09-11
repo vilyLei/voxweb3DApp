@@ -8,7 +8,6 @@ var pwindow: any = window;
 if(pwindow["VoxCore"] == undefined) {
     pwindow["VoxCore"] = {};
 }
-var VoxCore = pwindow["VoxCore"];
 
 export class Shell {
 
@@ -91,28 +90,29 @@ export class Shell {
         }
     }
     initialize(): void {
-        
-        console.log("location.href: ",location.href);
-        
-        this.m_urlManager.initialize();
-        if(this.m_urlManager.isModuleEnabled()) {
-            this.m_appModuleName = this.m_urlManager.getAppModuleName();
-            this.initConfigure();
+        if(this.m_inited) {
+            this.m_inited = false;
+            console.log("location.href: ",location.href);
+            console.log("Shell::initialize()......navigator.language: ",navigator.language);
+            
+            this.m_urlManager.initialize();
+            if(this.m_urlManager.isModuleEnabled()) {
+                
+                var VoxCore = pwindow["VoxCore"];
+                VoxCore["voxAppModuleLoader"] = this.m_moduleLoader;
+                this.m_appModuleName = this.m_urlManager.getAppModuleName();
+                this.initConfigure();
+            }
+
         }
     }
     private initConfigure(): void {
 
-        if ( this.m_inited ) {
-            this.m_inited = false;
-
-            console.log("Shell::initialize()......navigator.language: ",navigator.language);
-            
-            if(this.m_urlManager.isDevEnvironment()) {
-                this.loadNextModule();
-            }
-            else {
-                this.showButton();
-            }
+        if(this.m_urlManager.isDevEnvironment()) {
+            this.loadNextModule();
+        }
+        else {
+            this.showButton();
         }
     }
     private loadNextModule(): void {
