@@ -35,6 +35,14 @@ export class ModuleLoader {
     private m_moduleMap: Map<string, CodeModule> = new Map();
     constructor() { }
 
+    hasModuleByName(name: string): boolean {
+        
+        if (this.m_moduleMap.has(name)) {
+            let block: CodeModule = this.m_moduleMap.get(name);
+            return block.getStatus() == 2;
+        }
+        return false;
+    }
     load(purl: string, loadedFunc: () => void, name: string, className: string): void {
 
         let block: CodeModule = null;
