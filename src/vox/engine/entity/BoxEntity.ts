@@ -8,40 +8,49 @@ import { Engine } from "../Engine";
 
 class BoxEntity extends EntityObject implements IBoxEntity {
 
-    private m_boxEngity: IBoxEntity = null;
     normalScale: number = 1.0;
+    // uvPartsNumber value is 4 or 6
     uvPartsNumber: number = 0;
+    
+    private m_currEntity: BoxEntity = null;
     constructor() {
         super(false);
-        this.m_boxEngity = this.m_voxEntity = new Engine.BoxEntity();
+        this.m_currEntity = this.m_voxEntity = new Engine.BoxEntity();
     }
+    destroy() {
+        super.destroy();
+        if(this.m_voxEntity == null) {
+            this.m_currEntity = null;
+        }
+    }
+
     setVtxTransformMatrix(matrix: Matrix4): void {
-        this.m_boxEngity.setVtxTransformMatrix(matrix);
+        this.m_currEntity.setVtxTransformMatrix(matrix);
     }
     useFlatNormal(): void {
-        this.m_boxEngity.useFlatNormal();
+        this.m_currEntity.useFlatNormal();
     }
     useGourandNormal(): void {
-        this.m_boxEngity.useGourandNormal();
+        this.m_currEntity.useGourandNormal();
     }
 
     showBackFace(): void {
-        this.m_boxEngity.showBackFace();
+        this.m_currEntity.showBackFace();
     }
     showFrontFace(): void {
-        this.m_boxEngity.showFrontFace();
+        this.m_currEntity.showFrontFace();
     }
     showAllFace(): void {
-
+        this.m_currEntity.showAllFace();
     }
     scaleUVFaceAt(faceI: number, u: number, v: number, du: number, dv: number): void {
-        this.m_boxEngity.scaleUVFaceAt(faceI, u, v, du, dv);
+        this.m_currEntity.scaleUVFaceAt(faceI, u, v, du, dv);
     }
     scaleUVSFaceAt(faceI: number, uvsLen8: Float32Array): void {
-        this.m_boxEngity.scaleUVSFaceAt(faceI, uvsLen8);
+        this.m_currEntity.scaleUVSFaceAt(faceI, uvsLen8);
     }
     reinitializeMesh(): void {
-        this.m_boxEngity.reinitializeMesh();
+        this.m_currEntity.reinitializeMesh();
     }
     /**
      * set the face uv by the face index.
@@ -50,13 +59,13 @@ class BoxEntity extends EntityObject implements IBoxEntity {
      * @param offset the default value is 0
      */
     setFaceUVSAt(i: number, uvsLen8: Float32Array, offset: number = 0): void {
-        this.m_boxEngity.setFaceUVSAt(i, uvsLen8, offset);
+        this.m_currEntity.setFaceUVSAt(i, uvsLen8, offset);
     }
     transformFaceAt(i: number, mat4: Matrix4): void {
-        this.m_boxEngity.transformFaceAt(i, mat4);
+        this.m_currEntity.transformFaceAt(i, mat4);
     }
     getFaceCenterAt(i: number, outV: Vector3D): void {
-        this.m_boxEngity.getFaceCenterAt(i, outV);
+        this.m_currEntity.getFaceCenterAt(i, outV);
     }
     /**
      * initialize a box geometry data and texture data
@@ -64,8 +73,10 @@ class BoxEntity extends EntityObject implements IBoxEntity {
      * @param maxV the max position of the box
      * @param texList  TextureProxy instance list
      */
-    initialize(minV: Vector3D, maxV: Vector3D, texList: TextureProxy[] = null): void {
-        this.m_boxEngity.initialize(minV, maxV, texList);
+    initialize(minV: Vector3D, maxV: Vector3D, texList: TextureProxy[] = null): void {        
+        this.m_currEntity.normalScale = this.normalScale;
+        this.m_currEntity.uvPartsNumber = this.uvPartsNumber;
+        this.m_currEntity.initialize(minV, maxV, texList);
     }
     /**
      * initialize a box(geometry data and texture data) to a cube with the cube size value
@@ -73,16 +84,14 @@ class BoxEntity extends EntityObject implements IBoxEntity {
      * @param texList  TextureProxy instance list
      */
     initializeCube(cubeSize: number, texList: TextureProxy[]): void {
-        this.m_boxEngity.initializeCube(cubeSize, texList);
+        this.m_currEntity.normalScale = this.normalScale;
+        this.m_currEntity.uvPartsNumber = this.uvPartsNumber;
+        this.m_currEntity.initializeCube(cubeSize, texList);
     }
     initializeSizeXYZ(widthSize: number, heightSize: number, longSize: number, texList: TextureProxy[]): void {
-        this.m_boxEngity.initializeSizeXYZ(widthSize, heightSize, longSize, texList);
-    }
-    destroy() {
-        super.destroy();
-        if(this.m_voxEntity == null) {
-            this.m_boxEngity = null;
-        }
+        this.m_currEntity.normalScale = this.normalScale;
+        this.m_currEntity.uvPartsNumber = this.uvPartsNumber;
+        this.m_currEntity.initializeSizeXYZ(widthSize, heightSize, longSize, texList);
     }
 }
 

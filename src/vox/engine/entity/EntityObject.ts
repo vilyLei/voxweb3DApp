@@ -14,7 +14,7 @@ import { Engine } from "../Engine";
  */
 class EntityObject implements IEntityObject {
 
-    protected m_voxEntity: IEntityObject = null;
+    protected m_voxEntity: EntityObject = null;
     
     constructor(flag: boolean = true) {
 

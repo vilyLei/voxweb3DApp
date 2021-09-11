@@ -4,21 +4,26 @@ import { IAxisEntity } from "./IAxisEntity";
 import { EntityObject } from "./EntityObject";
 import { Engine } from "../Engine";
 
-class AxisEntity extends EntityObject implements IAxisEntity {
-    private m_axisEngity: IAxisEntity = null;
-    colorX: Color4 = new Engine.Color4();
-    colorY: Color4 = new Engine.Color4();
-    colorZ: Color4 = new Engine.Color4();
+class AxisEntity extends EntityObject {
+
+    private m_currEngity: AxisEntity = null;    
     constructor() {
         super(false);
-        this.m_voxEntity = this.m_axisEngity = new Engine.AxisEntity();
+        this.m_voxEntity = this.m_currEngity = new Engine.AxisEntity();
     }
+    destroy() {
+        super.destroy();
+        if (this.m_voxEntity == null) {
+            this.m_currEngity = null;
+        }
+    }
+    
     /**
      * initialize the axis entity mesh and geometry data
      * @param axisSize the X/Y/Z axis length
      */
     initialize(axisSize: number = 300.0): void {
-        this.m_axisEngity.initialize(axisSize);
+        this.m_currEngity.initialize(axisSize);
     }
     /**
      * initialize the axis entity mesh and geometry data
@@ -27,14 +32,7 @@ class AxisEntity extends EntityObject implements IAxisEntity {
      * @param sizeZ the Z axis length
      */
     initializeSizeXYZ(sizeX: number, sizeY: number, sizeZ: number): void {
-        this.m_axisEngity.initializeSizeXYZ(sizeX, sizeY, sizeZ);
-    }
-
-    destroy() {
-        super.destroy();
-        if (this.m_voxEntity == null) {
-            this.m_axisEngity = null;
-        }
+        this.m_currEngity.initializeSizeXYZ(sizeX, sizeY, sizeZ);
     }
 }
 

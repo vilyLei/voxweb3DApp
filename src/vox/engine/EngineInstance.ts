@@ -95,6 +95,10 @@ class EngineInstance {
      * @param entity renderable entity
      */
     removeEntity(entity: IEntityObject): void {
+        let reobj: any = entity as any;
+        if(reobj.__$getREObj != undefined) {
+            entity = reobj.__$getREObj();
+        }
         this.m_renderer.removeEntity(entity);
     }
     /**
