@@ -14,7 +14,7 @@ console.log("compileParam: ",compileParam);
 //if(process.env.npm_lifecycle_script == "vue-cli-service serve --voxtype=dev")
 if(keyIndx > 0 && compileParam != "")
 {
-  devDstStr = "./src/"+compileParam+"/dev.ts";
+  devDstStr = "./src/"+compileParam+"/compile/dev.ts";
   appDstStr = devDstStr;
 }
 module.exports = {

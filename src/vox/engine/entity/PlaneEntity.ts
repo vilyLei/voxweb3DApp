@@ -1,10 +1,10 @@
 
 import { Vector3D } from "../math/Vector3D";
 import { Color4 } from "../material/Color4";
-import { EntityObject } from "./EntityObject";
+import { IEntityObject } from "./IEntityObject";
 import { TextureProxy } from "../texture/TextureProxy";
 
-interface PlaneEntity extends EntityObject {
+interface PlaneEntity extends IEntityObject {
 
     color0: Color4;
     color1: Color4;

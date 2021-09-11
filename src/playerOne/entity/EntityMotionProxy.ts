@@ -1,5 +1,5 @@
 import {Vector3D} from "../../vox/engine/math/Vector3D";
-import {EntityObject} from "../../vox/engine/entity/EntityObject";
+import {IEntityObject} from "../../vox/engine/entity/IEntityObject";
 
 class EntityMotionProxy
 {
@@ -41,7 +41,7 @@ class EntityMotionProxy
     {
         this.m_isAwake = false;
     }
-    setTarget(tar:EntityObject):void
+    setTarget(tar:IEntityObject):void
     {
         this.m_target = tar;
         tar.getPosition(this.pv);
@@ -49,7 +49,7 @@ class EntityMotionProxy
         this.py = this.pv.y;
         this.pz = this.pv.z;
     }
-    getTarget():EntityObject
+    getTarget():IEntityObject
     {
         return this.m_target;
     }

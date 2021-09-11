@@ -1,7 +1,7 @@
-import { EntityObject } from "./EntityObject";
+import { IEntityObject } from "./IEntityObject";
 import { TextureProxy } from "../texture/TextureProxy";
 
-interface BillboardEntity extends EntityObject {
+interface BillboardEntity extends IEntityObject {
 
     setRGB3f(pr: number, pg: number, pb: number): void;
     setRGBOffset3f(pr: number, pg: number, pb: number): void;

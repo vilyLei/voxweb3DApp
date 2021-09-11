@@ -1,7 +1,7 @@
 import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
 import { EngineInstance } from "../vox/engine/EngineInstance";
 import { Engine } from "../vox/engine/Engine";
-import { BoxEntity } from "../vox/engine/entity/BoxEntity";
+import { Scene } from "./Scene";
 
 /**
  * A 3D APP Box view Demo
@@ -11,15 +11,13 @@ class App {
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
 
-    private m_box: BoxEntity;
-    private m_degY: number = 0.0;
-    private m_degZ: number = 0.0;
+    private m_scene: Scene;
     constructor() { }
 
     initialize(module: any): void {
 
         if (this.m_initFlag) {
-            
+
             this.m_initFlag = false;
             this.m_engine.initialize();
 
@@ -30,9 +28,8 @@ class App {
                 tex.setDataFromImage(img);
             }
 
-            this.m_box = new Engine.BoxEntity();
-            this.m_box.initializeCube(700.0, [tex]);
-            this.m_engine.addEntity(this.m_box);
+            this.m_scene = new Scene();
+            this.m_scene.initialize( this.m_engine );
         }
     }
 
@@ -43,10 +40,7 @@ class App {
 
         if (this.m_engine != null) {
 
-            this.m_degY += 1.0;
-            this.m_degZ += 0.5;
-            this.m_box.setRotationXYZ(0.0, this.m_degY, this.m_degZ);
-            this.m_box.update();
+            this.m_scene.run();
 
             this.m_engine.run();
         }

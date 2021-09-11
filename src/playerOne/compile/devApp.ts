@@ -1,8 +1,9 @@
 
+
 var pwindow: any = window;
 if(pwindow["VoxCore"] == undefined) {
     pwindow["VoxCore"] = {};
 }
 var VoxCore = pwindow["VoxCore"];
-import {App} from "./App";
-VoxCore["boxApp"] = App;
+import {App} from "../App";
+VoxCore["playerOneApp"] = App;

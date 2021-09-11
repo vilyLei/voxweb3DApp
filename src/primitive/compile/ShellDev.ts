@@ -1,5 +1,5 @@
 
-import {App} from "./App";
+import {App} from "../App";
 export class ShellDev {
 
     private m_inited: boolean = true;
@@ -7,21 +7,22 @@ export class ShellDev {
     private m_loadFlag: boolean = true;
     private m_className: string = "";
     private m_noduleInsList: any[] = [];
+    
     private m_urlsObj: any = {
         "baseRenderer": "static/code/engine/baseRenderer.js",
         "rfuncs": "static/code/engine/rfuncs.js",
-        "box": "static/code/apps/demos/box.js"
+        "primitive": "static/code/apps/demos/primitive.js"
     };
     private m_moduleNameList: string[] = [
         "baseRenderer",
         "rfuncs",
-        "box"
+        "primitive"
     ];
     
     private m_moduleClassNameList: string[] = [
         "BaseRenderer",
         "ROFunctions",
-        "boxApp"
+        "primitiveApp"
     ];
     private m_btnInfoList: string[] = null;
     private m_devTestEnv: boolean = false;
@@ -32,7 +33,6 @@ export class ShellDev {
     private initLoadJS(module_ns:string): void {
 
         let codeLoader: XMLHttpRequest = new XMLHttpRequest();
-        //codeLoader.open("GET", "static/code/rendererIsolate3/"+module_ns+".js", true);
         codeLoader.open("GET", this.m_urlsObj[module_ns], true);
         //xhr.responseType = "arraybuffer";
         codeLoader.onerror = function (err) {

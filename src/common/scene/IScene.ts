@@ -2,7 +2,7 @@
 import {EngineInstance} from "../../vox/engine/EngineInstance";
 
 /**
- * define the app demo cene behavior
+ * A 3D APP Demo Scene
  */
 interface IScene {
 

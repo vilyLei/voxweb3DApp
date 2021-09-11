@@ -1,8 +1,8 @@
 import { Camera } from "../view/Camera";
 import { Color4 } from "../material/Color4";
-import { EntityObject } from "./EntityObject";
+import { IEntityObject } from "./IEntityObject";
 
-interface FrustrumFrameEntity extends EntityObject {
+interface FrustrumFrameEntity extends IEntityObject {
     
     initiazlize(camera:Camera, farColor: Color4, nearColor: Color4, sideColor: Color4): void;
     updateFrame(camera:Camera): boolean;

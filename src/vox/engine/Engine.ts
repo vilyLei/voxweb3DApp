@@ -18,6 +18,7 @@ class Engine {
     static Camera: any;
     static PlaneEntity: any;
     static ImageTextureProxy: any;
+    static Entity: any;
     static AxisEntity: any;
     static BoxEntity: any;
     static SphereEntity: any;
@@ -51,8 +52,9 @@ class Engine {
             
             Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             
-            Engine.PlaneEntity = pmodule.Plane3DEntity;
+            Engine.Entity = pmodule.DisplayEntity;
             Engine.AxisEntity = pmodule.Axis3DEntity;
+            Engine.PlaneEntity = pmodule.Plane3DEntity;
             Engine.BoxEntity = pmodule.Box3DEntity;
             Engine.SphereEntity = pmodule.Sphere3DEntity;
             Engine.CylinderEntity = pmodule.Cylinder3DEntity;

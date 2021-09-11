@@ -46,7 +46,7 @@ class SphereObject {
             sph.setMaterial( material );
         }
         sph.initialize(100.0, 20,20, [texture]);
-        if(material == null) sph.getMaterial().setRGB3f(Math.random() * 1.5, Math.random() * 1.5, Math.random() * 1.5);
+        if(material == null) (sph.getMaterial() as any).setRGB3f(Math.random() * 1.5, Math.random() * 1.5, Math.random() * 1.5);
         engine.addEntity(sph, rpIndex);
         this.entity = sph;
     }

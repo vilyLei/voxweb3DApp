@@ -2,9 +2,9 @@
 import { Vector3D } from "../math/Vector3D";
 import { AABB } from "../math/AABB";
 import { Color4 } from "../material/Color4";
-import { EntityObject } from "./EntityObject";
+import { IEntityObject } from "./IEntityObject";
 
-interface BoxFrameEntity extends EntityObject {
+interface BoxFrameEntity extends IEntityObject {
 
     setRGB3f(pr:number,pg:number,pb:number): void;
     initialize(minV:Vector3D,maxV:Vector3D):void;

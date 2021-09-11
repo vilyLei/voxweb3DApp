@@ -1,5 +1,5 @@
 
-import {EntityObject} from "../entity/EntityObject";
+import {IEntityObject} from "../entity/IEntityObject";
 /**
  * 渲染器
  */
@@ -10,18 +10,18 @@ interface Renderer {
      * @param entity renderable entity
      * @param processIndex renderer process index, default value is 0
      */
-    addEntity(entity: EntityObject, processIndex: number): void;
+    addEntity(entity: IEntityObject, processIndex: number): void;
     /**
      * remove entity from the renderer instance
      * @param entity renderable entity
      */
-    removeEntity(entity: EntityObject): void;
+    removeEntity(entity: IEntityObject): void;
     /**
     * remove entity from the renderer process by process index
     * @param IRenderEntity IRenderEntity instance
     * @param processIndex RenderProcess instance index in renderer instance
     */
-    removeEntityByProcessIndex(entity: EntityObject, processIndex: number): void;
+    removeEntityByProcessIndex(entity: IEntityObject, processIndex: number): void;
     /**
      * append a new renderer process instance
      * @param batchEnabled batch renderer runtime resource data
@@ -47,7 +47,7 @@ interface Renderer {
     /**
      * 在任意阶段绘制一个指定的 entity,只要其资源数据准备完整
      */
-    drawEntity(entity: EntityObject, useGlobalUniform: boolean, forceUpdateUniform: boolean): void;
+    drawEntity(entity: IEntityObject, useGlobalUniform: boolean, forceUpdateUniform: boolean): void;
 }
 
 export {Renderer}

@@ -1,7 +1,7 @@
 
 import {Vector3D} from "../../vox/engine/math/Vector3D";
-import {EntityObject} from "../../vox/engine/entity/EntityObject";
-import {IScene} from "./IScene";
+import {IEntityObject} from "../../vox/engine/entity/IEntityObject";
+import {IScene} from "../../common/scene/IScene";
 
 import {ImageTextureProxy} from "../../vox/engine/texture/ImageTextureProxy";
 import {Engine} from "../../vox/engine/Engine";
@@ -20,7 +20,6 @@ import {DirecLightMaterialBuilder} from "../material/DirecLightMaterialBuilder";
 class PrimitivesScene implements IScene{
 
     private m_engine: EngineInstance = null;
-    //private m_camTrack: CameraCtrl = null;
     private m_materialBuilder: DirecLightMaterialBuilder = new DirecLightMaterialBuilder();
 
     constructor() { }
@@ -31,15 +30,12 @@ class PrimitivesScene implements IScene{
 
             this.m_engine = engine;
 
-            //this.m_camTrack = new CameraCtrl();
-            //this.m_camTrack.bindCamera(this.m_engine.getCamera());
-
             this.initScene();
         }
     }
     
-    private m_axis: EntityObject;
-    private m_plane: EntityObject;
+    private m_axis: IEntityObject;
+    private m_plane: IEntityObject;
     
     private initScene(): void {
 
@@ -126,13 +122,6 @@ class PrimitivesScene implements IScene{
 
         // update light dir data
         this.m_materialBuilder.updateLightData( this.m_engine.getCamera().getViewInvMatrix() );
-        //if(this.m_camTrack != null) {
-        //    // update light dir data
-        //    this.m_materialBuilder.updateLightData( this.m_engine.getCamera().getViewInvMatrix() );
-        //    this.m_camTrack.rotationOffsetAngleWorldY(-0.2);
-        //    // update camera data to gpu data
-        //    this.m_engine.updateCamera();
-        //}
     }
 }
 

@@ -6,18 +6,16 @@
   "author": "vily",
   "license": "MIT",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name VoxApp --dest dist ./src/main.ts",
-    "buildvox": "vue-cli-service build --target lib --name VoxApp --dest dist ./src/dev.ts",
 
     "dev_playerOne": "vue-cli-service serve --voxtype=playerOne",
-    "build_playerOne": "vue-cli-service build --target lib --name VoxApp --dest dist/playerOne ./src/playerOne/devApp.ts",
-
+    "build_playerOne": "vue-cli-service build --target lib --name VoxApp --dest dist/playerOne ./src/playerOne/compile/devApp.ts",
     
     "dev_box": "vue-cli-service serve --voxtype=box",
-    "build_box": "vue-cli-service build --target lib --name VoxApp --dest dist/box ./src/box/devApp.ts",
+    "build_box": "vue-cli-service build --target lib --name VoxApp --dest dist/box ./src/box/compile/devApp.ts",
 
-    "dev": "vue-cli-service serve --type=dev",
-    "devvox": "vue-cli-service serve --voxtype=dev"
+    "dev_primitive": "vue-cli-service serve --voxtype=primitive",
+    "build_primitive": "vue-cli-service build --target lib --name VoxApp --dest dist/primitive ./src/primitive/compile/devApp.ts"
+
   },
   "dependencies": {
     "@tweenjs/tween.js": "^18.4.2",

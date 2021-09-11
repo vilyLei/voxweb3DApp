@@ -1,5 +1,5 @@
 
-import {App} from "./App";
+import {App} from "../App";
 export class ShellDev {
 
     private m_inited: boolean = true;
@@ -10,18 +10,18 @@ export class ShellDev {
     private m_urlsObj: any = {
         "baseRenderer": "static/code/engine/baseRenderer.js",
         "rfuncs": "static/code/engine/rfuncs.js",
-        "box": "static/code/apps/demos/playerOne.js"
+        "box": "static/code/apps/demos/box.js"
     };
     private m_moduleNameList: string[] = [
         "baseRenderer",
         "rfuncs",
-        "playerOne"
+        "box"
     ];
     
     private m_moduleClassNameList: string[] = [
         "BaseRenderer",
         "ROFunctions",
-        "playerOneApp"
+        "boxApp"
     ];
     private m_btnInfoList: string[] = null;
     private m_devTestEnv: boolean = false;
@@ -32,7 +32,6 @@ export class ShellDev {
     private initLoadJS(module_ns:string): void {
 
         let codeLoader: XMLHttpRequest = new XMLHttpRequest();
-        //codeLoader.open("GET", "static/code/rendererIsolate3/"+module_ns+".js", true);
         codeLoader.open("GET", this.m_urlsObj[module_ns], true);
         //xhr.responseType = "arraybuffer";
         codeLoader.onerror = function (err) {

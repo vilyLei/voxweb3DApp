@@ -1,7 +1,7 @@
 
 import { RendererContext } from "../../vox/engine/render/RendererContext";
 import { Renderer } from "../../vox/engine/render/Renderer";
-import { EntityObject } from "../../vox/engine/entity/EntityObject";
+import { IEntityObject } from "../../vox/engine/entity/IEntityObject";
 
 import { Engine } from "./Engine";
 import { Camera } from "./view/Camera";
@@ -83,14 +83,18 @@ class EngineInstance {
      * @param entity renderable entity
      * @param processIndex renderer process index, default value is 0
      */
-    addEntity(entity: EntityObject, processIndex: number = 0): void {
+    addEntity(entity: IEntityObject, processIndex: number = 0): void {
+        let reobj: any = entity as any;
+        if(reobj.__$getREObj != undefined) {
+            entity = reobj.__$getREObj();
+        }
         this.m_renderer.addEntity(entity, processIndex);
     }
     /**
      * remove entity from the renderer instance
      * @param entity renderable entity
      */
-    removeEntity(entity: EntityObject): void {
+    removeEntity(entity: IEntityObject): void {
         this.m_renderer.removeEntity(entity);
     }
     /**
@@ -98,7 +102,7 @@ class EngineInstance {
      * @param IRenderEntity IRenderEntity instance
      * @param processIndex RenderProcess instance index in renderer instance
      */
-    removeEntityByProcessIndex(entity: EntityObject, processIndex: number): void {
+    removeEntityByProcessIndex(entity: IEntityObject, processIndex: number): void {
         this.m_renderer.removeEntityByProcessIndex(entity, processIndex);
     }
     /**
@@ -114,7 +118,7 @@ class EngineInstance {
     /**
      * 在任意阶段绘制一个指定的 entity,只要其资源数据准备完整(不是必要条件)
      */
-    drawEntity(entity: EntityObject, useGlobalUniform: boolean = false, forceUpdateUniform: boolean = true): void {
+    drawEntity(entity: IEntityObject, useGlobalUniform: boolean = false, forceUpdateUniform: boolean = true): void {
         this.m_renderer.drawEntity(entity, useGlobalUniform, forceUpdateUniform);
     }
     getCamera(): Camera {

@@ -2,9 +2,8 @@
 import {EngineInstance} from "../../vox/engine/EngineInstance";
 
 import {CameraCtrl} from "../../common/ctrl/CameraCtrl";
-import {IScene} from "./IScene";
+import {IScene} from "../../common/scene/IScene";
 import {PrimitivesScene} from "./PrimitivesScene";
-
 
 /**
  * main scene
@@ -25,8 +24,6 @@ class Scene implements IScene{
             this.m_camTrack = new CameraCtrl();
             this.m_camTrack.bindCamera(this.m_engine.getCamera());
 
-            console.log("engine.getCamera(): ",this.m_engine.getCamera());
-            console.log("camTrack: ",this.m_camTrack);
             this.m_subScene.initialize( this.m_engine );
             
         }

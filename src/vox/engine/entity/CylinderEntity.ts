@@ -1,9 +1,9 @@
 
 import { Vector3D } from "../math/Vector3D";
-import { EntityObject } from "./EntityObject";
+import { IEntityObject } from "./IEntityObject";
 import { TextureProxy } from "../texture/TextureProxy";
 
-interface CylinderEntity extends EntityObject {
+interface CylinderEntity extends IEntityObject {
     /**
      * initialize CylinderEntity instance.
      * @param radius cylinder radius

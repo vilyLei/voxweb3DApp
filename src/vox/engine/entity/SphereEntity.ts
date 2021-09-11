@@ -1,9 +1,9 @@
 
 import { Vector3D } from "../math/Vector3D";
-import { EntityObject } from "./EntityObject";
+import { IEntityObject } from "./IEntityObject";
 import { TextureProxy } from "../texture/TextureProxy";
 
-interface SphereEntity extends EntityObject {
+interface SphereEntity extends IEntityObject {
     initialize(radius: number, longitudeNumSegments: number, latitudeNumSegments: number, texList: TextureProxy[]): void;
 }
 
