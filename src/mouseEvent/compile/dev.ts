@@ -1,9 +1,5 @@
-
-//import {ShellDev as Demo} from "./ShellDev";
 import {Shell as Demo} from "../../shell/compile/Shell";
 import { App } from "../App";
-//  import {Shell as Demo} from "./Shell";
-
 let app: App = new App();
 ///////////////////////////////////////////////////////////////////////////////
 document.title = "Vox APP";

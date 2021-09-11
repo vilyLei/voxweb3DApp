@@ -22,9 +22,8 @@ export class Shell {
     private m_uiManager: UIManager= new UIManager();
     private m_appIns: App = new App();
     constructor() { }
-
+    
     private loadJSModule(module_ns:string, purl: string, className: string): void {
-        console.log("loadJSModule, purl: ",purl);
         this.m_moduleLoader.load(
             purl,
             () => {

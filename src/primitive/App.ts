@@ -2,11 +2,12 @@ import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
 import { EngineInstance } from "../vox/engine/EngineInstance";
 import { Engine } from "../vox/engine/Engine";
 import { Scene } from "./Scene";
+import { IApp } from "../vox/app/IApp";
 
 /**
  * A 3D APP Box view Demo
  */
-class App {
+class App implements IApp {
 
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
@@ -44,6 +45,16 @@ class App {
 
             this.m_engine.run();
         }
+    }
+    
+    getModuleName():string {
+        return "primitive";
+    }
+    getModuleClassName():string {
+        return "primitiveApp";
+    }
+    getRuntimeType():string {
+        return "default";
     }
 }
 
