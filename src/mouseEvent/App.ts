@@ -74,9 +74,9 @@ class App implements IApp {
      * running per frame
      */
     run(): void {
-        if(this.m_fpsModule != null) {
-            this.m_fpsModule.run();
-        }
+        
+        if(this.m_fpsModule != null) this.m_fpsModule.run();
+
         if (this.m_engine != null) {
 
             this.m_degY += 1.0;

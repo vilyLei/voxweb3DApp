@@ -105,7 +105,6 @@ class Scene implements IScene {
         dashedLS.initializeLS(new Engine.Vector3D(), new Engine.Vector3D(100,0,100));
         dashedLS.setXYZ(0, 400, 0);
         this.m_engine.addEntity(dashedLS);
-    
     }
 
     run(): void {

@@ -2,16 +2,12 @@ import {ShdCodeMaterial} from "../../vox/engine/material/ShdCodeMaterial";
 import {ShaderUniformData} from "../../vox/engine/material/ShaderUniformData";
 import {Engine} from "../../vox/engine/Engine";
 
-import {Vector3D} from "../../vox/engine/math/Vector3D";
-import {Matrix4} from "../../vox/engine/math/Matrix4";
-import {Color4} from "../../vox/engine/material/Color4";
-
-import {LightShdWrapper} from "./LightShdWrapper";
+import {NormalMapLightShdWrapper} from "./NormalMapLightShdWrapper";
 import {DirecLightParam} from "./DirecLightParam";
 
-class LightMaterialWrapper {
+class NormalMapLightWrapper {
 
-    static readonly shaderWrapper: LightShdWrapper = new LightShdWrapper();
+    static readonly shaderWrapper: NormalMapLightShdWrapper = new NormalMapLightShdWrapper();
 
     private m_lightParam:DirecLightParam = null;
 
@@ -28,7 +24,7 @@ class LightMaterialWrapper {
         uniformData.uniformNameList = ["u_color"];
         uniformData.dataList = [this.m_colorData];
         this.m_material = new Engine.ShaderCodeMaterial();
-        this.m_material.setShaderCodeWrapper(LightMaterialWrapper.shaderWrapper);
+        this.m_material.setShaderCodeWrapper(NormalMapLightWrapper.shaderWrapper);
         this.m_material.setSelfUniformData(uniformData);
         this.m_material.setSharedUniformsData(this.m_lightParam.lightUniformDataList);
     }
@@ -47,4 +43,4 @@ class LightMaterialWrapper {
         this.m_colorData[4] = a;
     }
 }
-export {LightMaterialWrapper};
+export {NormalMapLightWrapper};
