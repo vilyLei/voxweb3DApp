@@ -10,6 +10,8 @@ class Engine {
     private static s_rcontext: RendererContext = null;
 
     // recorde the rednerer engine core class ------------- begin.
+    static RendererDevice: any;
+
     static MathConst: any;
     static Vector3D: any;
     static Color4: any;
@@ -40,7 +42,12 @@ class Engine {
     static GetRendererContext(): RendererContext {
         return Engine.s_rcontext;
     }
-
+    static SetDebugEnabled(enabled: boolean): void {
+        
+        Engine.RendererDevice.SHADERCODE_TRACE_ENABLED = enabled;
+        if(enabled) {
+        }
+    }
     static InitializeModule(pmodule: any): void {
         console.log("Engine::InitializeModule(), Engine.s_renderer == null: ",Engine.s_renderer == null);
         if(Engine.s_renderer == null) {
@@ -50,7 +57,11 @@ class Engine {
             Engine.s_renderer = mainModule.getRenderer() as Renderer;
             Engine.s_rcontext = mainModule.getRendererContext() as RendererContext;
             
+            Engine.RendererDevice = pmodule.RendererDevice;
+
             Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
+            Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
+            
             
             Engine.Entity = pmodule.DisplayEntity;
             Engine.AxisEntity = pmodule.Axis3DEntity;
