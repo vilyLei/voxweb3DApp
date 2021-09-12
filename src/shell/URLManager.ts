@@ -70,6 +70,13 @@ class URLManager {
         if(this.m_appModuleName == "") {
             return;
         }
+        let k: number = str.indexOf("runtimeApp");
+        if(k < 0 || (k > 0 && str.indexOf("?") < k)) {
+            moduleName = str.slice(k);
+            params = moduleName.split("&");
+            moduleName = params[0];
+            this.m_appModuleName = moduleName.split("=")[1];
+        }
         this.setModuleName( this.m_appModuleName );
         this.m_moduleEnabled = true;
         this.m_devTestEnv = (str.indexOf("/localhost") >= 0 || str.indexOf("127.0.0.") >= 0);
