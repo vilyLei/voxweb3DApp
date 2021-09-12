@@ -54,8 +54,9 @@ class MaterialBuilder {
         }
 
         let shaderWrapper: ShaderCodeWrapper = this.shaderWrapper;
-
-        let colorData: Float32Array = new Float32Array([Math.random() * 1.3, Math.random() * 1.3, Math.random() * 1.3, 1.0]);
+        let c4: Color4 = new Engine.Color4();
+        c4.normalizeRandom(2.0);
+        let colorData: Float32Array = new Float32Array([c4.r,c4.g,c4.b, 1.0]);
         let uniformData: ShaderUniformData = new Engine.ShaderUniformData();
         uniformData.uniformNameList = ["u_color"];
         uniformData.dataList = [colorData];

@@ -4,6 +4,10 @@ import { Engine } from "../vox/engine/Engine";
 import { IApp } from "../vox/app/IApp";
 import { BoxEntity } from "../vox/engine/entity/BoxEntity";
 
+import { ColorMaterialWrapper } from "./material/ColorMaterialWrapper";
+import { LightParam, LightMaterialWrapper } from "./material/LightMaterialWrapper";
+import { Vector3D } from "../vox/engine/math/Vector3D";
+
 /**
  * A 3D APP Box view Demo
  */
@@ -12,9 +16,12 @@ class App implements IApp{
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
 
-    private m_box: BoxEntity;
-    private m_degY: number = 0.0;
-    private m_degZ: number = 0.0;
+    private m_colorBox: BoxEntity;
+    private m_colorBoxRotV: Vector3D;;
+    
+    private m_lightBox: BoxEntity;
+    private m_lightBoxRotV: Vector3D;
+    private m_lightParam: LightParam = null;
     constructor() { }
 
     initialize(module: any): void {
@@ -31,10 +38,35 @@ class App implements IApp{
                 tex.setDataFromImage(img);
             }
 
-            this.m_box = new Engine.BoxEntity();
-            this.m_box.initializeCube(700.0, [tex]);
-            this.m_engine.addEntity(this.m_box);
+            this.m_lightParam  = new LightParam();
+            this.m_lightParam.initialize();
+            this.createLightEntity(tex, new Engine.Vector3D());
+
+            this.createColorEntity(tex, new Engine.Vector3D(-600,0.0,0.0));
         }
+    }
+    private createLightEntity(tex: ImageTextureProxy, pos: Vector3D): void {
+
+        this.m_lightBoxRotV = new Engine.Vector3D();
+        let materialWrrapper: LightMaterialWrapper = new LightMaterialWrapper(this.m_lightParam);
+        materialWrrapper.setRGBColor3f(0.0,1.0,1.0);
+        this.m_lightBox = new BoxEntity();
+        this.m_lightBox.setMaterial(materialWrrapper.getMaterial());
+        this.m_lightBox.initializeCube(500.0, [tex]);
+        this.m_lightBox.setPosition(pos);
+        this.m_engine.addEntity(this.m_lightBox);
+    }
+    private createColorEntity(tex: ImageTextureProxy, pos: Vector3D): void {
+
+        this.m_colorBoxRotV = new Engine.Vector3D();
+        let colorMaterialWrapper: ColorMaterialWrapper = new ColorMaterialWrapper();
+        //colorMaterialWrapper.setRGBColor3f(2.0,0.0,0.0);
+        colorMaterialWrapper.setRGBColor3f(0.0,1.0,0.0);
+        this.m_colorBox = new BoxEntity();
+        this.m_colorBox.setMaterial(colorMaterialWrapper.getMaterial());
+        this.m_colorBox.initializeCube(500.0, [tex]);
+        this.m_colorBox.setPosition(pos);
+        this.m_engine.addEntity(this.m_colorBox);
     }
 
     /**
@@ -44,10 +76,17 @@ class App implements IApp{
 
         if (this.m_engine != null) {
 
-            this.m_degY += 1.0;
-            this.m_degZ += 0.5;
-            this.m_box.setRotationXYZ(0.0, this.m_degY, this.m_degZ);
-            this.m_box.update();
+            this.m_colorBoxRotV.y += 1.0;
+            this.m_colorBoxRotV.z += 0.5;
+            this.m_colorBox.setRotation( this.m_colorBoxRotV );
+            this.m_colorBox.update();
+
+            this.m_lightBoxRotV.y += -1.0;
+            this.m_lightBoxRotV.z += 0.5;
+            this.m_lightBox.setRotation( this.m_colorBoxRotV );
+            this.m_lightBox.update();
+
+            this.m_lightParam.updateLightData(this.m_engine.getCamera().getViewInvMatrix())
 
             this.m_engine.run();
         }

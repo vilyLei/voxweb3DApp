@@ -31,7 +31,7 @@ class App implements IApp{
                 tex.setDataFromImage(img);
             }
 
-            this.m_box = new Engine.BoxEntity();
+            this.m_box = new BoxEntity();
             this.m_box.initializeCube(700.0, [tex]);
             this.m_engine.addEntity(this.m_box);
         }

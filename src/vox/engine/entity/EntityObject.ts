@@ -76,6 +76,9 @@ class EntityObject implements IEntityObject {
     }
 
 
+    setRotation(v3: Vector3D): void {
+        this.m_voxEntity.setRotationXYZ(v3.x, v3.y, v3.z);
+    }
     setRotationXYZ(rx: number, ry: number, rz: number): void {
         this.m_voxEntity.setRotationXYZ(rx, ry, rz);
     }

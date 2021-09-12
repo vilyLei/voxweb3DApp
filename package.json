@@ -26,7 +26,10 @@
     "build_mouseEvent": "vue-cli-service build --target lib --name VoxApp --dest dist/mouseEvent ./src/mouseEvent/compile/devApp.ts",
   
     "dev_fps": "vue-cli-service serve --voxtype=fps",
-    "build_fps": "vue-cli-service build --target lib --name VoxApp --dest dist/fps ./src/fps/compile/devApp.ts"
+    "build_fps": "vue-cli-service build --target lib --name VoxApp --dest dist/fps ./src/fps/compile/devApp.ts",
+    
+    "dev_material": "vue-cli-service serve --voxtype=material",
+    "build_material": "vue-cli-service build --target lib --name VoxApp --dest dist/material ./src/material/compile/devApp.ts"
 
   },
   "dependencies": {

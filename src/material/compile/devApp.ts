@@ -5,4 +5,4 @@ if(pwindow["VoxCore"] == undefined) {
 }
 var VoxCore = pwindow["VoxCore"];
 import {App} from "../App";
-VoxCore["boxApp"] = App;
+VoxCore["materialApp"] = App;
