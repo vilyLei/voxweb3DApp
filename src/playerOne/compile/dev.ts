@@ -1,4 +1,4 @@
-import {Shell as Demo} from "../../shell/compile/Shell";
+import {Shell as Demo} from "../../shell/Shell";
 import { App } from "../App";
 let app: App = new App();
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,5 @@
-
+import { IApp } from "../vox/app/IApp";
+import {ModuleManager} from "./ModuleManager";
 export class CodeModule {
 
     private m_status: number = 0;
@@ -33,8 +34,47 @@ export class CodeModule {
 export class ModuleLoader {
 
     private m_moduleMap: Map<string, CodeModule> = new Map();
-    constructor() { }
+    private m_moduleManager: ModuleManager;
 
+    constructor(moduleManager: ModuleManager) {
+        this.m_moduleManager = moduleManager;
+    }
+    getSystemModuleInstance(name: string, loadedFunc: () => void = null): IApp {
+
+        if(this.m_moduleManager.testSystemModuleByName( name )) {
+
+            if (this.m_moduleMap.has(name)) {
+                if(loadedFunc != null) loadedFunc();
+            }
+            else {
+                this.load(this.m_moduleManager.getModuleUrlByName(name), loadedFunc, name, name);
+            }
+        }
+        return null;
+    }
+    
+    getModuleInstance(name: string, loadedFunc: () => void = null): IApp {
+
+        if(this.m_moduleManager.testSystemModuleByName( name )) {
+
+            if (this.m_moduleMap.has(name)) {
+                if(loadedFunc != null) loadedFunc();
+                return this.m_moduleManager.getSystemModuleInstance( name );
+            }
+            else {
+                this.load(this.m_moduleManager.getModuleUrlByName(name), loadedFunc, name, name);
+            }
+        }
+        else {
+            if (this.m_moduleMap.has(name)) {
+                if(loadedFunc != null) loadedFunc();
+            }
+            else {
+                this.load("static/code/apps/modules/"+name+".js", loadedFunc, name, name+"App");
+            }
+        }
+        return null;
+    }
     hasModuleByName(name: string): boolean {
         
         if (this.m_moduleMap.has(name)) {
@@ -79,10 +119,16 @@ export class ModuleLoader {
             }
             scriptEle.innerHTML = codeLoader.response;
             document.head.appendChild(scriptEle);
+
+            //if(this.m_moduleManager.testSystemModuleByName(name)) {
+            this.m_moduleManager.createSystemModuleInstanceByName( name );
+            //}
+
             let block = this.m_moduleMap.get(name);
             for(let i: number = 0; i < block.callbackList.length; i++) {
-                (block.callbackList.pop())();
+                if(block.callbackList[i] != null)(block.callbackList[i])();
             }
+            block.callbackList = [];
             block = new CodeModule(2, name, className, purl);
             this.m_moduleMap.set(name, block);
         }

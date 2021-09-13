@@ -2,12 +2,13 @@ import { ImageTextureProxy } from "../../vox/engine/texture/ImageTextureProxy";
 import { EngineInstance } from "../../vox/engine/EngineInstance";
 import { Engine } from "../../vox/engine/Engine";
 import { CameraCtrl } from "../../common/ctrl/CameraCtrl";
+import { AppBase } from "../../vox/app/AppBase";
 import { IApp } from "../../vox/app/IApp";
 import { EntityObject } from "../../vox/engine/entity/EntityObject";
 import { BoxEntity } from "../../vox/engine/entity/BoxEntity";
 import { Vector3D } from "../../vox/engine/math/Vector3D";
 
-import { IModuleLoader } from "../../shell/IModuleLoader";
+import { IModuleLoader } from "../../vox/app/module/IModuleLoader";
 import { IScene } from "../../common/scene/IScene";
 import { DirecLightParam } from "../material/DirecLightParam";
 import { ColorMaterialWrapper } from "../material/ColorMaterialWrapper";
@@ -34,7 +35,7 @@ class MotionObject {
 /**
  * A 3D APP Box view Demo
  */
-class Scene implements IScene {
+class Scene extends AppBase implements IScene {
 
     private m_engine: EngineInstance = null;
     private m_lightParam: DirecLightParam = null;
@@ -43,30 +44,15 @@ class Scene implements IScene {
     private m_fpsModule: IApp = null;
     private m_fpsModuleFlag: boolean = true;
     private m_camTrack: CameraCtrl = null;
-    constructor() { }
+    constructor() {
+        super();
+    }
 
     private loaFPSModule(): void {
 
         if (this.m_fpsModuleFlag) {
             this.m_fpsModuleFlag = false;
-            let moduleNS: string = "fps";
-            let className: string = moduleNS + "App";
-            let pwindow: any = window;
-            var VoxCore = pwindow["VoxCore"];
-            let loader: IModuleLoader = VoxCore["voxAppModuleLoader"] as IModuleLoader;
-            if (loader.hasModuleByName(moduleNS)) {
-
-            }
-            loader.load(
-                "static/code/apps/demos/" + moduleNS + ".js",
-                (): void => {
-                    console.log("load oscillator module ok.");
-                    this.m_fpsModule = new VoxCore[className]() as IApp;
-                    this.m_fpsModule.initialize(VoxCore);
-                },
-                moduleNS,
-                className
-            );
+            this.getModuleInstance("fps",(ins: any): void => {this.m_fpsModule = ins;});
         }
     }
     private initEvt(): void {
@@ -126,8 +112,8 @@ class Scene implements IScene {
         entity.setMaterial(materialWrrapper.getMaterial());
         entity.initializeCube(500.0, [tex0, tex1, tex2, tex3, tex4]);
         entity.setPosition(pos);
-        this.m_engine.addEntity( entity);
-        this.m_motionObjs.push(new MotionObject( entity ) );
+        this.m_engine.addEntity(entity);
+        this.m_motionObjs.push(new MotionObject(entity));
     }
     private createNormalMapEntity(tex0: ImageTextureProxy, tex1: ImageTextureProxy, tex2: ImageTextureProxy, tex3: ImageTextureProxy, pos: Vector3D): void {
 
@@ -139,8 +125,8 @@ class Scene implements IScene {
         entity.setMaterial(materialWrrapper.getMaterial());
         entity.initializeCube(500.0, [tex0, tex1, tex2, tex3]);
         entity.setPosition(pos);
-        this.m_engine.addEntity( entity );
-        this.m_motionObjs.push(new MotionObject( entity ) );
+        this.m_engine.addEntity(entity);
+        this.m_motionObjs.push(new MotionObject(entity));
     }
     private createLightEntity(tex: ImageTextureProxy, pos: Vector3D): void {
 
@@ -152,8 +138,8 @@ class Scene implements IScene {
         entity.setMaterial(materialWrrapper.getMaterial());
         entity.initializeCube(500.0, [tex]);
         entity.setPosition(pos);
-        this.m_engine.addEntity( entity );
-        this.m_motionObjs.push( new MotionObject( entity ) );
+        this.m_engine.addEntity(entity);
+        this.m_motionObjs.push(new MotionObject(entity));
     }
     private createColorEntity(tex: ImageTextureProxy, pos: Vector3D): void {
 
@@ -165,8 +151,8 @@ class Scene implements IScene {
         entity.setMaterial(materialWrrapper.getMaterial());
         entity.initializeCube(500.0, [tex]);
         entity.setPosition(pos);
-        this.m_engine.addEntity( entity );
-        this.m_motionObjs.push(new MotionObject( entity ));
+        this.m_engine.addEntity(entity);
+        this.m_motionObjs.push(new MotionObject(entity));
     }
 
     /**
@@ -181,7 +167,7 @@ class Scene implements IScene {
             // update camera data to gpu data
             this.m_engine.updateCamera();
         }
-        for(let i: number = 0; i < this.m_motionObjs.length; ++i) {
+        for (let i: number = 0; i < this.m_motionObjs.length; ++i) {
             this.m_motionObjs[i].run();
         }
 

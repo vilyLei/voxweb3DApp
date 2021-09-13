@@ -1,49 +1,41 @@
 import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
 import { EngineInstance } from "../vox/engine/EngineInstance";
 import { Engine } from "../vox/engine/Engine";
+import { AppBase } from "../vox/app/AppBase";
 import { IApp } from "../vox/app/IApp";
-import { IModuleLoader } from "../shell/IModuleLoader";
 import { BoxEntity } from "../vox/engine/entity/BoxEntity";
 
 /**
  * A 3D APP Box view Demo
  */
-class App implements IApp {
+class App extends AppBase implements IApp {
 
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
     private m_fpsModule: IApp = null;
+    private m_fpsModuleFlag: boolean = true;
 
     private m_box: BoxEntity;
     private m_degY: number = 0.0;
     private m_degZ: number = 0.0;
-    constructor() { }
-
-    private createModuleByName(name: string): IApp {
-        return null;
+    constructor() {
+        super();
     }
-    private initEvt(): void {
-        
-        document.onmousedown = (evt:any): void =>
-        {
-            let moduleNS: string = "fps";
-            let className: string = moduleNS + "App";
-            let pwindow: any = window;
-            var VoxCore = pwindow["VoxCore"];
-            let loader: IModuleLoader = VoxCore["voxAppModuleLoader"] as IModuleLoader;
-            if(loader.hasModuleByName(moduleNS)) {
 
+    private initEvt(): void {
+
+        document.onmousedown = (evt: any): void => {
+            if (this.m_fpsModuleFlag) {
+                this.m_fpsModuleFlag = false;
+                let moduleNS: string = "fps";
+                this.getModuleInstance(
+                    moduleNS,
+                    (ins: any): void => {
+                        this.m_fpsModule = ins;
+                        console.log("get a fps ins");
+                    }
+                );
             }
-            loader.load(
-                "static/code/apps/demos/"+moduleNS+".js",
-                ():void=>{
-                    console.log("load oscillator module ok.");
-                    this.m_fpsModule = new VoxCore[className]() as IApp;
-                    this.m_fpsModule.initialize(VoxCore);
-                },
-                moduleNS,
-                className
-            );
             console.log("Mouse Event App Mouse Down...");
         }
     }
@@ -74,8 +66,8 @@ class App implements IApp {
      * running per frame
      */
     run(): void {
-        
-        if(this.m_fpsModule != null) this.m_fpsModule.run();
+
+        if (this.m_fpsModule != null) this.m_fpsModule.run();
 
         if (this.m_engine != null) {
 
@@ -87,14 +79,14 @@ class App implements IApp {
             this.m_engine.run();
         }
     }
-    
-    getModuleName():string {
+
+    getModuleName(): string {
         return "mouseEvent";
     }
-    getModuleClassName():string {
+    getModuleClassName(): string {
         return "mouseEventApp";
     }
-    getRuntimeType():string {
+    getRuntimeType(): string {
         return "default";
     }
 }

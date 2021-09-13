@@ -15,9 +15,11 @@ class App implements IApp{
     private m_box: BoxEntity;
     private m_degY: number = 0.0;
     private m_degZ: number = 0.0;
-    constructor() { }
+    constructor() {}
 
     initialize(module: any): void {
+        
+        console.log("box app module demo initialize() ....");
 
         if (this.m_initFlag) {
             

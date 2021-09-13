@@ -25,11 +25,17 @@
     "dev_mouseEvent": "vue-cli-service serve --voxtype=mouseEvent",
     "build_mouseEvent": "vue-cli-service build --target lib --name VoxApp --dest dist/mouseEvent ./src/mouseEvent/compile/devApp.ts",
   
-    "dev_fps": "vue-cli-service serve --voxtype=fps",
-    "build_fps": "vue-cli-service build --target lib --name VoxApp --dest dist/fps ./src/fps/compile/devApp.ts",
-    
     "dev_material": "vue-cli-service serve --voxtype=material",
-    "build_material": "vue-cli-service build --target lib --name VoxApp --dest dist/material ./src/material/compile/devApp.ts"
+    "build_material": "vue-cli-service build --target lib --name VoxApp --dest dist/material ./src/material/compile/devApp.ts",
+    
+    "dev_thread": "vue-cli-service serve --voxtype=thread",
+    "build_thread": "vue-cli-service build --target lib --name VoxApp --dest dist/thread ./src/thread/compile/devApp.ts",
+    
+    "dev_modules_fps": "vue-cli-service serve --voxtype=modules_fps",
+    "build_modules_fps": "vue-cli-service build --target lib --name VoxApp --dest dist/modules/fps ./src/modules/fps/compile/devApp.ts",
+    
+    "dev_modules_draco": "vue-cli-service serve --voxtype=modules_draco",
+    "build_modules_draco": "vue-cli-service build --target lib --name VoxApp --dest dist/modules/draco ./src/modules/draco/compile/devApp.ts"
 
   },
   "dependencies": {

@@ -1,4 +1,4 @@
-import {Shell as Demo} from "./Shell";
+import {Shell as Demo} from "../Shell";
 
 ///////////////////////////////////////////////////////////////////////////////
 document.title = "Vox APP";

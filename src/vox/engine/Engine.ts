@@ -18,6 +18,10 @@ class Engine {
     static Matrix4: any;
     static AABB: any;
     static Camera: any;
+
+    static DataMesh: any;
+    static DracoMesh: any;
+
     static PlaneEntity: any;
     static ImageTextureProxy: any;
     static Entity: any;
@@ -35,6 +39,13 @@ class Engine {
     static ShaderUniformData: any;
 
     // recorde the rednerer engine core class ------------- end.
+    
+    static IsWebGL1(): boolean {
+        return Engine.RendererDevice.IsWebGL1();
+    }
+    static IsWebGL2(): boolean {
+        return Engine.RendererDevice.IsWebGL2();
+    }
 
     static GetRenderer(): Renderer {
         return Engine.s_renderer;
@@ -63,6 +74,8 @@ class Engine {
             Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             
             
+            Engine.Entity = pmodule.DisplayEntity;
+
             Engine.Entity = pmodule.DisplayEntity;
             Engine.AxisEntity = pmodule.Axis3DEntity;
             Engine.PlaneEntity = pmodule.Plane3DEntity;

@@ -8,16 +8,16 @@ class URLManager {
     private m_appModuleName: string = "";
     private m_urlsObj: any = {
         "baseRenderer": "static/code/engine/baseRenderer.js",
-        "rfuncs": "static/code/engine/rfuncs.js"
+        "roFunctions": "static/code/engine/roFunctions.js"
     };
     private m_moduleNameList: string[] = [
         "baseRenderer",
-        "rfuncs"
+        "roFunctions"
     ];
     
     private m_moduleClassNameList: string[] = [
-        "BaseRenderer",
-        "ROFunctions"
+        "baseRenderer",
+        "roFunctions"
     ];
     private m_loadIndex: number = 0;
     private m_loadedIndex: number = 0;
@@ -48,16 +48,10 @@ class URLManager {
     useNext(): void {
         this.m_loadIndex ++;
     }
+    
+    private parseUrlParam(url: string): void {
 
-    initialize(appModule: IApp = null): void {
-        if(appModule != null) {
-            this.m_moduleEnabled = true;
-            this.m_devTestEnv = true;
-            return;
-        }
-        this.m_moduleEnabled = false;
-        let str: string = location.href + "";
-        let params: string[] = str.split("?");
+        let params: string[] = url.split("?");
         if(params.length < 2) {
             return;
         }
@@ -67,19 +61,40 @@ class URLManager {
             return;
         }
         this.m_appModuleName = params[1];
+        
         if(this.m_appModuleName == "") {
             return;
         }
-        let k: number = str.indexOf("runtimeApp");
-        if(k < 0 || (k > 0 && str.indexOf("?") < k)) {
-            moduleName = str.slice(k);
+        let k: number = url.indexOf("runtimeApp");
+        if(k > 0 && (k > 0 && url.indexOf("?") < k)) {
+            moduleName = url.slice(k);
             params = moduleName.split("&");
             moduleName = params[0];
             this.m_appModuleName = moduleName.split("=")[1];
         }
-        this.setModuleName( this.m_appModuleName );
-        this.m_moduleEnabled = true;
-        this.m_devTestEnv = (str.indexOf("/localhost") >= 0 || str.indexOf("127.0.0.") >= 0);
+    }
+    initialize(appModule: IApp = null): IApp {
+        
+        this.m_moduleEnabled = false;
+        this.m_appModuleName = "";
+        let url: string = location.href + "";
+        this.parseUrlParam( url );
+        if(this.m_appModuleName == "") {
+            if(appModule != null) {
+
+                this.m_moduleEnabled = true;
+                this.m_devTestEnv = true;
+                this.m_appModuleName = "";
+                return appModule;
+            }
+        }
+        else {
+
+            this.setModuleName( this.m_appModuleName );
+            this.m_moduleEnabled = true;
+            this.m_devTestEnv = (url.indexOf("/localhost") >= 0 || url.indexOf("127.0.0.") >= 0);
+        }
+        return null;
     }
     isModuleEnabled(): boolean {
         return this.m_moduleEnabled;
