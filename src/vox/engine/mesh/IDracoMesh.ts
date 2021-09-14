@@ -7,7 +7,7 @@ interface IDracoMesh extends IMesh {
     getUVS(): Float32Array;
     getNVS(): Float32Array;
     
-    initialize(geomDataList: any[], dataIsZxy: boolean): void;
+    initialize(geomDataList: any[]): void;
 }
 
 export { IDracoMesh }

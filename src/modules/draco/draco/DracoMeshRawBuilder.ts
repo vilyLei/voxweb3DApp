@@ -24,7 +24,9 @@ class DracoMeshRawBuilder {
     threadSystem: ThreadSystemModule = null;
     constructor() {
     }
-    
+    getTaskClassId(): number {
+        return 1;
+    }
     setListener(l: DracoTaskListener): void {
         this.m_listener = l;
         if(this.m_dracoTask != null) {
@@ -51,7 +53,7 @@ class DracoMeshRawBuilder {
     private m_meshBuffer: ArrayBuffer = null;
     private m_segs: number[] = [];
     private loadMeshFile(furl: string): void {
-
+        console.log("DracoMeshRawBuilder::loadMeshFile(), url: ",furl);
         let loader: DracoBufferLoader = new DracoBufferLoader();
         loader.multiBuffers = this.multiBuffers;
         loader.load(
@@ -60,8 +62,8 @@ class DracoMeshRawBuilder {
 
                 this.m_meshBuffer = buffer;
 
-                //  console.log("loaded a file, buffer: ",buffer);
-                //  console.log("loaded a file, param: ",param);
+                console.log("loaded a file, buffer: ",buffer);
+                console.log("loaded a file, param: ",param);
 
                 let s: string[] = param.split(',');
                 let len: number = Math.floor(s.length / 2);
@@ -384,11 +386,11 @@ function ThreadDraco() {
             case "DRACO_PARSE":
                 let parseData = dracoParser.receiveCall(data);
                 //console.log("XXXXXXXXXXXXXXXX parseData: ", parseData);
-                //return { data: bufData, transfers: tarr, errorFlag: errorFlag };
                 data.data = {module: parseData.data, errorFlag: parseData.errorFlag};
                 postDataMessage(data, parseData.transfers);
                 break;
             case "DRACO_INIT":
+                //console.log("XXXXXXXXXXXXXXXX DRACO_INIT");
                 initDecoder(data);
                 break;
             default:

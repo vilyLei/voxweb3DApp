@@ -19,7 +19,7 @@ class EntityObject implements IEntityObject {
     constructor(flag: boolean = true) {
 
         if (flag) {
-            this.m_voxEntity = Engine.Entity();
+            this.m_voxEntity = new Engine.Entity();
         }
     }
     __$getREObj(): IEntityObject {

@@ -42,6 +42,7 @@ export class Shell {
         var VoxCore = pwindow.VoxCore;
         console.log("module build success, module name: ",module_ns);
         if(module_ns == "baseRenderer") {
+
         }
         else if (VoxCore[className] != null) {
             console.log("module class name: ",className);
@@ -80,7 +81,7 @@ export class Shell {
 
         
         let mainModule = new module["baseRenderer"]();
-        mainModule.initialize();
+        mainModule.initialize(module);
         module["mainModule"] = mainModule;
         this.m_module = mainModule;
 

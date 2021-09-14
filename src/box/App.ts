@@ -43,16 +43,14 @@ class App implements IApp{
      * running per frame
      */
     run(): void {
-
-        if (this.m_engine != null) {
-
+        if(this.m_box != null) {
+            
             this.m_degY += 1.0;
             this.m_degZ += 0.5;
             this.m_box.setRotationXYZ(0.0, this.m_degY, this.m_degZ);
             this.m_box.update();
-
-            this.m_engine.run();
         }
+        if (this.m_engine != null) this.m_engine.run();
     }
     getModuleName():string {
         return "box";

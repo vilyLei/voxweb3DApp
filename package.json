@@ -35,7 +35,10 @@
     "build_modules_fps": "vue-cli-service build --target lib --name VoxApp --dest dist/modules/fps ./src/modules/fps/compile/devApp.ts",
     
     "dev_modules_draco": "vue-cli-service serve --voxtype=modules_draco",
-    "build_modules_draco": "vue-cli-service build --target lib --name VoxApp --dest dist/modules/draco ./src/modules/draco/compile/devApp.ts"
+    "build_modules_draco": "vue-cli-service build --target lib --name VoxApp --dest dist/modules/draco ./src/modules/draco/compile/devApp.ts",
+    
+    "dev_modules_objDataParser": "vue-cli-service serve --voxtype=modules_objDataParser",
+    "build_modules_objDataParser": "vue-cli-service build --target lib --name VoxApp --dest dist/modules/objDataParser ./src/modules/objDataParser/compile/devApp.ts"
 
   },
   "dependencies": {

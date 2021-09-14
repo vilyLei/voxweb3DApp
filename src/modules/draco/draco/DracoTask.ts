@@ -154,7 +154,7 @@ class DracoTask {
     }
 
     private initCurrTask(wasmBin: ArrayBuffer, index: number = 0): void {
-
+        console.log("initCurrTask, DRACO_INIT.");
         let sd: DracoSendData = DracoSendData.Create();
         sd.taskCmd = "DRACO_INIT";
         sd.data = wasmBin;
@@ -170,6 +170,7 @@ class DracoTask {
     }
     private parseData(bufData: ArrayBuffer, beginI: number, endI: number): void {
         if (bufData != null && DracoTask.s_inited) {
+            console.log("parseData, DRACO_PARSE.");
             let sd: DracoSendData = DracoSendData.Create();
             sd.taskCmd = "DRACO_PARSE";
             sd.data = bufData;
@@ -191,6 +192,7 @@ class DracoTask {
             for (let i: number = 0; i < DracoTask.s_taskTotal; i++) {
                 if (this.m_segIndex < this.m_segs.length) {
                     let buf: ArrayBuffer = this.m_srcBuf.slice(this.m_segs[this.m_segIndex], this.m_segs[this.m_segIndex + 1]);
+                    console.log("parseNextSeg send.");
                     this.parseData(buf, 0, buf.byteLength);
                     this.m_segIndex += 2;
                 }
@@ -214,8 +216,8 @@ class DracoTask {
     // return true, task finish; return false, task continue...
     parseDone(data: any, flag: number): boolean {
 
-        //  console.log("DracoTask::parseDone(), data.taskCmd: ", data.taskCmd);
-        //  console.log("DracoTask::parseDone(), data: ", data);
+        //console.log("DracoTask::parseDone(), data.taskCmd: ", data.taskCmd);
+        console.log("DracoTask::parseDone(), data: ", data);
 
         DracoSendData.RestoreByUid(data.dataIndex);
         switch (data.taskCmd) {
@@ -238,7 +240,7 @@ class DracoTask {
                 this.m_threadTask.increaseParseIndex();
                 this.m_modules.push(data.data.module);
                 if (this.m_listener != null) {
-                    //console.log("this.isFinished(): ", this.isFinished());
+                    console.log("this.m_threadTask.isFinished(): ", this.m_threadTask.isFinished());
                     if (this.m_threadTask.isFinished()) {
                         this.m_listener.dracoParseFinish(this.m_modules, this.m_threadTask.getParseTotal());
                     }

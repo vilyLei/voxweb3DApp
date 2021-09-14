@@ -59,6 +59,7 @@ class Engine {
         if(enabled) {
         }
     }
+    
     static InitializeModule(pmodule: any): void {
         console.log("Engine::InitializeModule(), Engine.s_renderer == null: ",Engine.s_renderer == null);
         if(Engine.s_renderer == null) {
@@ -68,12 +69,21 @@ class Engine {
             Engine.s_renderer = mainModule.getRenderer() as Renderer;
             Engine.s_rcontext = mainModule.getRendererContext() as RendererContext;
             
+            Engine.MathConst = pmodule.MathConst;
+            Engine.Vector3D = pmodule.Vector3D;
+            Engine.Color4 = pmodule.Color4;
+            Engine.Matrix4 = pmodule.Matrix4;
+            Engine.AABB = pmodule.AABB;            
+            Engine.Camera = pmodule.CameraBase;
+
             Engine.RendererDevice = pmodule.RendererDevice;
 
             Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             
-            
+            Engine.DataMesh = pmodule.DataMesh;
+            Engine.DracoMesh = pmodule.DracoMesh;
+
             Engine.Entity = pmodule.DisplayEntity;
 
             Engine.Entity = pmodule.DisplayEntity;
@@ -88,13 +98,6 @@ class Engine {
             Engine.BoxFrameEntity = pmodule.BoxFrame3D;
             Engine.FrustrumFrameEntity = pmodule.FrustrumFrame3DEntity;
     
-            Engine.MathConst = pmodule.MathConst;
-            Engine.Vector3D = pmodule.Vector3D;
-            Engine.Color4 = pmodule.Color4;
-            Engine.Matrix4 = pmodule.Matrix4;
-            Engine.AABB = pmodule.AABB;
-            
-            Engine.Camera = pmodule.CameraBase;
             
             Engine.ShaderCodeMaterial = pmodule.ShaderCodeMaterial;
             Engine.ShaderUniformData = pmodule.ShaderUniformData;
