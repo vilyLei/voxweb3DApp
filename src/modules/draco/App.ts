@@ -14,6 +14,7 @@ import { BoxEntity } from "../../vox/engine/entity/BoxEntity";
 import { EntityObject } from "../../vox/engine/entity/EntityObject";
 
 import { DirecLightParam } from "../../material/material/DirecLightParam";
+import { NormalMapLightWrapper } from "../../material/material/NormalMapLightWrapper";
 import { ParallaxMapLightWrapper } from "../../material/material/ParallaxMapLightWrapper";
 import { IDracoMesh } from "../../vox/engine/mesh/IDracoMesh";
 import { CameraCtrl } from "../../common/ctrl/CameraCtrl";
@@ -86,7 +87,8 @@ class App extends AppBase implements IApp,DracoTaskListener{
         //let box:BoxEntity = new BoxEntity();
         //box.initializeCube(700.0, [this.m_tex]);
         
-        let materialWrrapper: ParallaxMapLightWrapper = new ParallaxMapLightWrapper(this.m_lightParam);
+        //let materialWrrapper: ParallaxMapLightWrapper = new ParallaxMapLightWrapper(this.m_lightParam);
+        let materialWrrapper: NormalMapLightWrapper = new NormalMapLightWrapper(this.m_lightParam);
         materialWrrapper.getMaterial().initializeByCodeBuf( true );
         materialWrrapper.getMaterial().setTextureList( this.m_texList );
 
@@ -199,8 +201,8 @@ class App extends AppBase implements IApp,DracoTaskListener{
             let baseColorTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_COLOR.png");
             let mormalTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_NRM.png");
             let specularTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_SPEC.png");
-            let occTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_DISP.png");
-            let dispTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_OCC.png");
+            let occTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_OCC.png");
+            let dispTex: ImageTextureProxy = this.createTexture("static/assets/disp/" + texName + "_DISP.png");
             this.m_texList.push(baseColorTex);
             this.m_texList.push(mormalTex);
             this.m_texList.push(specularTex);
