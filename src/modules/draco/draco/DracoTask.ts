@@ -4,9 +4,9 @@
 /*  Vily(vily313@126.com)                                                  */
 /*                                                                         */
 /***************************************************************************/
-// ThreadTask example
 
 import { IThreadSendData, IThreadSystemTaskListener, ThreadSystemTask } from "../../../vox/engine/thread/ThreadSystemTask";
+import { DracoTaskListener } from "../../../vox/engine/draco/DracoTaskListener";
 import { ThreadSystemModule } from "../core/ThreadSystemModule";
 
 class DracoSendData implements IThreadSendData {
@@ -117,11 +117,6 @@ class DracoSendData implements IThreadSendData {
             DracoSendData.m_unitList[uid].reset();
         }
     }
-}
-
-interface DracoTaskListener {
-    dracoParse(module: any, index: number, total: number): void;
-    dracoParseFinish(modules: any[], total: number): void;
 }
 
 class DracoTask {
@@ -272,4 +267,4 @@ class DracoTask {
     }
 }
 
-export {DracoSendData,  DracoTaskListener, DracoTask};
+export {DracoSendData, DracoTask};

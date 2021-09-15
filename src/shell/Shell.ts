@@ -10,6 +10,9 @@ var pwindow: any = window;
 if(pwindow["VoxCore"] == undefined) {
     pwindow["VoxCore"] = {};
 }
+if(pwindow["VoxIns"] == undefined) {
+    pwindow["VoxIns"] = {};
+}
 
 export class Shell {
 
@@ -63,10 +66,10 @@ export class Shell {
             this.loadNextModule();
         }
         else {
-            this.showButton();
+            this.activeLoad();
         }
     }
-    private showButton(): void {
+    private activeLoad(): void {
 
         this.m_uiManager.enableButton(
             this.m_urlManager.getIndex(),
@@ -79,7 +82,6 @@ export class Shell {
 
         this.m_moduleLoader.loadFinish();
 
-        
         let mainModule = new module["baseRenderer"]();
         mainModule.initialize(module);
         module["mainModule"] = mainModule;
@@ -87,7 +89,7 @@ export class Shell {
 
         let Engine:any = module["VoxAppEngine"];
         if(Engine != null) {
-            Engine.InitializeModule( module );
+            Engine.Initialize();
         }
         this.m_moduleManager.initializeModules();
         console.log("this.m_appModule != null: ",this.m_appModule != null);
@@ -103,7 +105,7 @@ export class Shell {
             
             var VoxCore = pwindow["VoxCore"];
             this.m_moduleManager = new ModuleManager( VoxCore );
-            this.m_moduleLoader = new ModuleLoader( this.m_moduleManager );
+            this.m_moduleLoader = new ModuleLoader( this.m_moduleManager, this.m_uiManager );
             this.m_inited = false;
             console.log("location.href: ",location.href);
             console.log("Shell::initialize()......navigator.language: ",navigator.language);
@@ -123,7 +125,7 @@ export class Shell {
             this.loadNextModule();
         }
         else {
-            this.showButton();
+            this.activeLoad();
         }
     }
     private loadNextModule(): void {

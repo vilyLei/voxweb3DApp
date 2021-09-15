@@ -72,10 +72,13 @@ class EngineInstance {
      * run the rendering complete process
      */
     run(): void {
-        this.m_rcontext.renderBegin();
-        this.m_renderer.update();
-        this.m_renderer.run();
-        this.m_rcontext.runEnd();
+        
+        if(this.m_renderer != null) {
+            this.m_rcontext.renderBegin();
+            this.m_renderer.update();
+            this.m_renderer.run();
+            this.m_rcontext.runEnd();
+        }
     }
     /**
      * 将可渲染对象添加到渲染器

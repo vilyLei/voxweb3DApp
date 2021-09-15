@@ -2,12 +2,13 @@ import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
 import { EngineInstance } from "../vox/engine/EngineInstance";
 import { Engine } from "../vox/engine/Engine";
 import { IApp } from "../vox/app/IApp";
+import { AppBase } from "../vox/app/AppBase";
 import { BoxEntity } from "../vox/engine/entity/BoxEntity";
 
 /**
  * A 3D APP Box view Demo
  */
-class App implements IApp{
+class App extends AppBase implements IApp{
 
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
@@ -15,7 +16,7 @@ class App implements IApp{
     private m_box: BoxEntity;
     private m_degY: number = 0.0;
     private m_degZ: number = 0.0;
-    constructor() {}
+    constructor() { super(); }
 
     initialize(module: any): void {
         

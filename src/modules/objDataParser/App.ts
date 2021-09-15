@@ -1,4 +1,5 @@
 import { IApp } from "../../vox/app/IApp";
+import { AppBase } from "../../vox/app/AppBase";
 import { ObjDataParser } from "./ObjDataParser";
 /*
 // for example
@@ -12,7 +13,7 @@ import { BoxEntity } from "../../vox/engine/entity/BoxEntity";
 /**
  * fps display module
  */
-class App implements IApp{
+class App extends AppBase implements IApp{
 
     private m_initFlag: boolean = true;
     private m_parser: ObjDataParser = new ObjDataParser();
@@ -21,8 +22,7 @@ class App implements IApp{
     //  private m_entity: EntityObject;
     //  private m_degY: number = 0.0;
     //  private m_degZ: number = 0.0;
-    constructor() {
-    }
+    constructor() { super(); }
 
     load(url: string, callback: (data:any)=>void, moduleScale: number = 1.0, dataIsZxy:boolean = false): void {
         if(url != null && url != "") {

@@ -1,11 +1,12 @@
 import { IApp } from "../vox/app/IApp";
+import { AppBase } from "../vox/app/AppBase";
 /**
  * A 3D APP Box view Demo
  */
-class App implements IApp{
+class App extends AppBase implements IApp{
 
     private m_initFlag: boolean = true;
-    constructor() { }
+    constructor() { super() }
 
     initialize(module: any): void {
 

@@ -10,33 +10,33 @@ class Engine {
     private static s_rcontext: RendererContext = null;
 
     // recorde the rednerer engine core class ------------- begin.
-    static RendererDevice: any;
+    static readonly RendererDevice: any;
 
-    static MathConst: any;
-    static Vector3D: any;
-    static Color4: any;
-    static Matrix4: any;
-    static AABB: any;
-    static Camera: any;
+    static readonly MathConst: any;
+    static readonly Vector3D: any;
+    static readonly Color4: any;
+    static readonly Matrix4: any;
+    static readonly AABB: any;
+    static readonly Camera: any;
 
-    static DataMesh: any;
-    static DracoMesh: any;
+    static readonly DataMesh: any;
+    static readonly DracoMesh: any;
 
-    static PlaneEntity: any;
-    static ImageTextureProxy: any;
-    static Entity: any;
-    static AxisEntity: any;
-    static BoxEntity: any;
-    static SphereEntity: any;
-    static CylinderEntity: any;
-    static BillboardEntity: any;
-    static LineEntity: any;
-    static DashedLineEntity: any;
-    static BoxFrameEntity: any;
-    static FrustrumFrameEntity: any;
+    static readonly PlaneEntity: any;
+    static readonly ImageTextureProxy: any;
+    static readonly Entity: any;
+    static readonly AxisEntity: any;
+    static readonly BoxEntity: any;
+    static readonly SphereEntity: any;
+    static readonly CylinderEntity: any;
+    static readonly BillboardEntity: any;
+    static readonly LineEntity: any;
+    static readonly DashedLineEntity: any;
+    static readonly BoxFrameEntity: any;
+    static readonly FrustrumFrameEntity: any;
 
-    static ShaderCodeMaterial: any;
-    static ShaderUniformData: any;
+    static readonly ShaderCodeMaterial: any;
+    static readonly ShaderUniformData: any;
 
     // recorde the rednerer engine core class ------------- end.
     
@@ -60,47 +60,48 @@ class Engine {
         }
     }
     
-    static InitializeModule(pmodule: any): void {
+    static Initialize(): void {
+        var pwindow: any = window;
+        let pmodule: any = pwindow["VoxCore"];
         console.log("Engine::InitializeModule(), Engine.s_renderer == null: ",Engine.s_renderer == null);
         if(Engine.s_renderer == null) {
 
             let mainModule: any = pmodule["mainModule"];
-
-            Engine.s_renderer = mainModule.getRenderer() as Renderer;
-            Engine.s_rcontext = mainModule.getRendererContext() as RendererContext;
+            let engine: any = Engine;
+            engine.s_renderer = mainModule.getRenderer() as Renderer;
+            engine.s_rcontext = mainModule.getRendererContext() as RendererContext;
             
-            Engine.MathConst = pmodule.MathConst;
-            Engine.Vector3D = pmodule.Vector3D;
-            Engine.Color4 = pmodule.Color4;
-            Engine.Matrix4 = pmodule.Matrix4;
-            Engine.AABB = pmodule.AABB;            
-            Engine.Camera = pmodule.CameraBase;
+            engine.MathConst = pmodule.MathConst;
+            engine.Vector3D = pmodule.Vector3D;
+            engine.Color4 = pmodule.Color4;
+            engine.Matrix4 = pmodule.Matrix4;
+            engine.AABB = pmodule.AABB;            
+            engine.Camera = pmodule.CameraBase;
 
-            Engine.RendererDevice = pmodule.RendererDevice;
+            engine.RendererDevice = pmodule.RendererDevice;
 
-            Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
-            Engine.ImageTextureProxy = pmodule.ImageTextureProxy;
+            engine.ImageTextureProxy = pmodule.ImageTextureProxy;
+            engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             
-            Engine.DataMesh = pmodule.DataMesh;
-            Engine.DracoMesh = pmodule.DracoMesh;
+            engine.DataMesh = pmodule.DataMesh;
+            engine.DracoMesh = pmodule.DracoMesh;
 
-            Engine.Entity = pmodule.DisplayEntity;
+            engine.Entity = pmodule.DisplayEntity;
 
-            Engine.Entity = pmodule.DisplayEntity;
-            Engine.AxisEntity = pmodule.Axis3DEntity;
-            Engine.PlaneEntity = pmodule.Plane3DEntity;
-            Engine.BoxEntity = pmodule.Box3DEntity;
-            Engine.SphereEntity = pmodule.Sphere3DEntity;
-            Engine.CylinderEntity = pmodule.Cylinder3DEntity;
-            Engine.BillboardEntity = pmodule.Billboard3DEntity;
-            Engine.LineEntity = pmodule.Line3DEntity;
-            Engine.DashedLineEntity = pmodule.DashedLine3DEntity;
-            Engine.BoxFrameEntity = pmodule.BoxFrame3D;
-            Engine.FrustrumFrameEntity = pmodule.FrustrumFrame3DEntity;
-    
+            engine.Entity = pmodule.DisplayEntity;
+            engine.AxisEntity = pmodule.Axis3DEntity;
+            engine.PlaneEntity = pmodule.Plane3DEntity;
+            engine.BoxEntity = pmodule.Box3DEntity;
+            engine.SphereEntity = pmodule.Sphere3DEntity;
+            engine.CylinderEntity = pmodule.Cylinder3DEntity;
+            engine.BillboardEntity = pmodule.Billboard3DEntity;
+            engine.LineEntity = pmodule.Line3DEntity;
+            engine.DashedLineEntity = pmodule.DashedLine3DEntity;
+            engine.BoxFrameEntity = pmodule.BoxFrame3D;
+            engine.FrustrumFrameEntity = pmodule.FrustrumFrame3DEntity;
             
-            Engine.ShaderCodeMaterial = pmodule.ShaderCodeMaterial;
-            Engine.ShaderUniformData = pmodule.ShaderUniformData;
+            engine.ShaderCodeMaterial = pmodule.ShaderCodeMaterial;
+            engine.ShaderUniformData = pmodule.ShaderUniformData;
             
             // // for test
             // let shaderCodeMaterialIns = new Engine.ShaderCodeMaterial();
@@ -115,5 +116,7 @@ if(pwindow["VoxCore"] == undefined) {
     pwindow["VoxCore"] = {};
 }
 var VoxCore = pwindow["VoxCore"];
-VoxCore["VoxAppEngine"] = Engine;
+if(VoxCore["VoxAppEngine"] == undefined) {    
+    VoxCore["VoxAppEngine"] = Engine;
+}
 export {Engine};

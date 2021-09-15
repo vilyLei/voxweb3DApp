@@ -9,7 +9,8 @@
 import { IThreadSendData, IThreadSystemTaskListener, ThreadSystemTask } from "../../../vox/engine/thread/ThreadSystemTask";
 import { ThreadSystemModule } from "../core/ThreadSystemModule";
 import {DracoWasmLoader} from "./DracoWasmLoader";
-import {DracoTaskListener,DracoTask} from "./DracoTask";
+import { DracoTaskListener } from "../../../vox/engine/draco/DracoTaskListener";
+import {DracoTask} from "./DracoTask";
 import {DracoBufferLoader} from "./DracoBufferLoader";
 
 class DracoMeshRawBuilder {
@@ -64,16 +65,23 @@ class DracoMeshRawBuilder {
 
                 console.log("loaded a file, buffer: ",buffer);
                 console.log("loaded a file, param: ",param);
-
-                let s: string[] = param.split(',');
-                let len: number = Math.floor(s.length / 2);
-                this.m_segs = [];
-                for (let i: number = 0; i < len; ++i) {
-                    this.m_segs.push(parseInt(s[i * 2]), parseInt(s[i * 2 + 1]));
-                }
-                this.m_dracoTask.parseSrcData(this.m_meshBuffer, this.m_segs);
+                this.loadSegments(param);
             }
         );
+    }
+    private m_param: string = "";
+    private loadSegments(param: string): void {
+        this.m_param = param;
+        if(this.m_dracoTask != null && this.m_param != "") {
+            this.m_param = "";
+            let s: string[] = param.split(',');
+            let len: number = Math.floor(s.length / 2);
+            this.m_segs = [];
+            for (let i: number = 0; i < len; ++i) {
+                this.m_segs.push(parseInt(s[i * 2]), parseInt(s[i * 2 + 1]));
+            }
+            this.m_dracoTask.parseSrcData(this.m_meshBuffer, this.m_segs);
+        }
     }
     private onWasmLoaded(data: any): void {
 
@@ -86,7 +94,8 @@ class DracoMeshRawBuilder {
         //  ThreadSystem.InitTaskByCodeStr(data.wapper + this.m_dracoParserStr + this.m_dracoThreadStr, 0, "ThreadDraco");
         this.m_dracoTask.setListener( this.m_listener );
         this.m_dracoTask.initTask(this.m_wasmLoader.wasmBin);
-
+        
+        this.loadSegments( this.m_param );
     }
     
     private m_dracoParserStr: string =

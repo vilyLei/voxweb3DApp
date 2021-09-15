@@ -1,18 +1,18 @@
 import { EngineInstance } from "../vox/engine/EngineInstance";
 import { IApp } from "../vox/app/IApp";
+import { AppBase } from "../vox/app/AppBase";
 import { Scene } from "./scene/Scene";
-import { Engine } from "../vox/engine/Engine";
 
 /**
  * A 3D APP Box view Demo
  */
-class App implements IApp{
+class App extends AppBase implements IApp{
 
     private m_initFlag: boolean = true;
     private m_engine: EngineInstance = new EngineInstance();
     private m_scene: Scene = new Scene();
 
-    constructor() { }
+    constructor() { super(); }
 
     initialize(module: any): void {
 

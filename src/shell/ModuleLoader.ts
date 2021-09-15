@@ -1,5 +1,6 @@
 import { IApp } from "../vox/app/IApp";
 import {ModuleManager} from "./ModuleManager";
+import {UIManager} from "./UIManager";
 export class CodeModule {
 
     private m_status: number = 0;
@@ -35,9 +36,11 @@ export class ModuleLoader {
 
     private m_moduleMap: Map<string, CodeModule> = new Map();
     private m_moduleManager: ModuleManager;
+    private m_uiManager: UIManager;
 
-    constructor(moduleManager: ModuleManager) {
+    constructor(moduleManager: ModuleManager, uiManager: UIManager) {
         this.m_moduleManager = moduleManager;
+        this.m_uiManager = uiManager;
     }
     getSystemModuleInstance(name: string, loadedFunc: () => void = null): IApp {
 
@@ -101,6 +104,7 @@ export class ModuleLoader {
         block.callbackList.push( loadedFunc );
         this.m_moduleMap.set(name, block);
 
+        this.m_uiManager.showLoadStart();
         let codeLoader: XMLHttpRequest = new XMLHttpRequest();
         codeLoader.open("GET", purl, true);
         //xhr.responseType = "arraybuffer";
@@ -109,10 +113,12 @@ export class ModuleLoader {
         }
 
         codeLoader.onprogress = (e) => {
-            this.showLoadInfo(" " + Math.round(100.0 * e.loaded / e.total) + "% ");
+            this.showLoadInfo(e);
         };
         codeLoader.onload = () => {
             
+            this.m_uiManager.showLoaded();
+
             let scriptEle: HTMLScriptElement = document.createElement("script");
             scriptEle.onerror = (e) => {
                 console.error("module script onerror, e: ", e);
@@ -134,24 +140,11 @@ export class ModuleLoader {
         }
         codeLoader.send(null);
     }
-    private m_div: any = null;
-    private showLoadInfo(str: string): void {
-        if (this.m_div == null) {
-
-            var div: HTMLDivElement = document.createElement('div');
-            var pdiv: any = div;
-            this.m_div = pdiv;
-            pdiv.width = 128;
-            pdiv.height = 64;
-            pdiv.style.backgroundColor = "#aa0033";
-            pdiv.style.left = '10px';
-            pdiv.style.top = '50px';
-            pdiv.style.position = 'absolute';
-            document.body.appendChild(this.m_div);
-        }
-        this.m_div.innerHTML = str;
+    private showLoadInfo(e: any): void {
+        console.log("showLoadInfo e:",e);
+        this.m_uiManager.showLoadProgressInfo(e);
     }
     loadFinish(): void {
-        if (this.m_div != null) document.body.removeChild(this.m_div);
+        this.m_uiManager.loadFinish();
     }
 }

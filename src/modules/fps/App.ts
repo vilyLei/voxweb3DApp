@@ -1,4 +1,5 @@
 import { IApp } from "../../vox/app/IApp";
+import { AppBase } from "../../vox/app/AppBase";
 
 
 class CanvasFPSViewer
@@ -116,11 +117,11 @@ class CanvasFPSViewer
 /**
  * fps display module
  */
-class App implements IApp{
+class App extends AppBase implements IApp{
 
     private m_initFlag: boolean = true;
     private m_fpsViewer: CanvasFPSViewer = new CanvasFPSViewer();
-    constructor() { }
+    constructor() { super(); }
 
     initialize(module: any): void {
 

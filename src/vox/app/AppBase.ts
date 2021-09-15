@@ -5,7 +5,7 @@ import { IModuleLoader } from "../../vox/app/module/IModuleLoader";
  * A 3D APP Box view Demo
  */
 class AppBase {
-
+    private m_running: boolean = true;
     constructor() { }
 
     protected getSystemModuleInstance(moduleNS: string, loadedFunc: (ins: any) => void = null): any {
@@ -45,6 +45,16 @@ class AppBase {
                 }
             }
         );
+    }
+    
+    startup(): void {
+        this.m_running = true;
+    }
+    quit(): void {
+        this.m_running = false;
+    }
+    isRunning(): boolean {
+        return this.m_running;
     }
 }
 
