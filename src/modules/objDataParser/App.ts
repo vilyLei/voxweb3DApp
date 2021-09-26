@@ -4,7 +4,7 @@ import { ObjDataParser } from "./ObjDataParser";
 /*
 // for example
 import { ImageTextureProxy } from "../../vox/engine/texture/ImageTextureProxy";
-import { EngineInstance } from "../../vox/engine/EngineInstance";
+import { RendererInstance } from "../../vox/engine/RendererInstance";
 import { Engine } from "../../vox/engine/Engine";
 import { IDataMesh } from "../../vox/engine/mesh/IDataMesh";
 import { EntityObject } from "../../vox/engine/entity/EntityObject";
@@ -18,7 +18,7 @@ class App extends AppBase implements IApp{
     private m_initFlag: boolean = true;
     private m_parser: ObjDataParser = new ObjDataParser();
 
-    //  private m_engine: EngineInstance = new EngineInstance();
+    //  private m_engine: RendererInstance = new RendererInstance();
     //  private m_entity: EntityObject;
     //  private m_degY: number = 0.0;
     //  private m_degZ: number = 0.0;

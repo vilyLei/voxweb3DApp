@@ -1,5 +1,5 @@
 import { ImageTextureProxy } from "../../vox/engine/texture/ImageTextureProxy";
-import { EngineInstance } from "../../vox/engine/EngineInstance";
+import { RendererInstance } from "../../vox/engine/RendererInstance";
 import { Engine } from "../../vox/engine/Engine";
 import { CameraCtrl } from "../../common/ctrl/CameraCtrl";
 import { AppBase } from "../../vox/app/AppBase";
@@ -37,7 +37,7 @@ class MotionObject {
  */
 class Scene extends AppBase implements IScene {
 
-    private m_engine: EngineInstance = null;
+    private m_engine: RendererInstance = null;
     private m_lightParam: DirecLightParam = null;
 
     private m_motionObjs: MotionObject[] = [];
@@ -73,7 +73,7 @@ class Scene extends AppBase implements IScene {
         }
         return tex;
     }
-    initialize(engine: EngineInstance): void {
+    initialize(engine: RendererInstance): void {
 
         if (this.m_engine == null) {
 

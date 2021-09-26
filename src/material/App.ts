@@ -1,4 +1,4 @@
-import { EngineInstance } from "../vox/engine/EngineInstance";
+import { RendererInstance } from "../vox/engine/RendererInstance";
 import { IApp } from "../vox/app/IApp";
 import { AppBase } from "../vox/app/AppBase";
 import { Scene } from "./scene/Scene";
@@ -9,7 +9,7 @@ import { Scene } from "./scene/Scene";
 class App extends AppBase implements IApp{
 
     private m_initFlag: boolean = true;
-    private m_engine: EngineInstance = new EngineInstance();
+    private m_engine: RendererInstance = new RendererInstance();
     private m_scene: Scene = new Scene();
 
     constructor() { super(); }

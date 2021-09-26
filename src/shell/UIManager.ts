@@ -39,7 +39,7 @@ export class UIManager {
                     "load test exmaple"
             ];
         }
-
+        
         document.body.style.background = "#000000";
         this.m_bodyDiv = document.createElement('div');
         this.m_bodyDiv.style.width = "100vw";

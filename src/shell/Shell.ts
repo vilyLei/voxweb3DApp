@@ -1,6 +1,5 @@
 
 import { IApp } from "../vox/app/IApp";
-import {App} from "./App";
 import {URLManager} from "./URLManager";
 import {ModuleManager} from "./ModuleManager";
 import {ModuleLoader} from "./ModuleLoader";
@@ -20,11 +19,9 @@ export class Shell {
     private m_module: any = null;
     private m_loadFlag: boolean = true;
     private m_moduleManager: ModuleManager = null;
-    //private m_sysModules: any[] = [];
     private m_urlManager: URLManager= new URLManager();
     private m_moduleLoader: ModuleLoader;
     private m_uiManager: UIManager= new UIManager();
-    private m_appIns: App = new App();
     constructor() { }
     
     private loadJSModule(module_ns:string, purl: string, className: string): void {
@@ -43,14 +40,11 @@ export class Shell {
         this.m_urlManager.loaded();
         let pwindow: any = window;
         var VoxCore = pwindow.VoxCore;
-        console.log("module build success, module name: ",module_ns);
-        if(module_ns == "baseRenderer") {
+        console.log("module build success, module name,className: ",module_ns,className, "VoxCore[className] != null: ",VoxCore[className] != null);
+        if(module_ns != "baseRenderer" && VoxCore[className] != null) {
 
-        }
-        else if (VoxCore[className] != null) {
-            console.log("module class name: ",className);
-            
             let noduleIns: IApp = new VoxCore[className]() as IApp;
+            
             //this.m_sysModules.push( noduleIns );
             this.m_moduleManager.addSystemModule( noduleIns, module_ns );
 
@@ -118,6 +112,13 @@ export class Shell {
             }
 
         }
+    }
+    
+    setModuleNameAt(i: number, ns: string): void {
+        this.m_urlManager.setModuleNameAt(i, ns);
+    }
+    setModuleClassNameAt(i: number, ns: string): void {
+        this.m_urlManager.setModuleClassNameAt(i, ns);
     }
     private initConfigure(): void {
 

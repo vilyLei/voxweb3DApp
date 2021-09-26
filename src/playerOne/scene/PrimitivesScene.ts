@@ -5,7 +5,7 @@ import {IScene} from "../../common/scene/IScene";
 
 import {ImageTextureProxy} from "../../vox/engine/texture/ImageTextureProxy";
 import {Engine} from "../../vox/engine/Engine";
-import {EngineInstance} from "../../vox/engine/EngineInstance";
+import {RendererInstance} from "../../vox/engine/RendererInstance";
 import {SphereObject} from "../../playerOne/entity/SphereObject";
 import {AxisEntity} from "../../vox/engine/entity/AxisEntity";
 import {PlaneEntity} from "../../vox/engine/entity/PlaneEntity";
@@ -19,12 +19,12 @@ import {DirecLightMaterialBuilder} from "../material/DirecLightMaterialBuilder";
  */
 class PrimitivesScene implements IScene{
 
-    private m_engine: EngineInstance = null;
+    private m_engine: RendererInstance = null;
     private m_materialBuilder: DirecLightMaterialBuilder = new DirecLightMaterialBuilder();
 
     constructor() { }
 
-    initialize(engine: EngineInstance): void {
+    initialize(engine: RendererInstance): void {
 
         if(this.m_engine == null) {
 

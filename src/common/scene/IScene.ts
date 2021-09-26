@@ -1,12 +1,12 @@
 
-import {EngineInstance} from "../../vox/engine/EngineInstance";
+import {RendererInstance} from "../../vox/engine/RendererInstance";
 
 /**
  * A 3D APP Demo Scene
  */
 interface IScene {
 
-    initialize(engine: EngineInstance): void;
+    initialize(engine: RendererInstance): void;
     run(): void;
 }
 

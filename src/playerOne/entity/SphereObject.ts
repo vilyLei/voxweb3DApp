@@ -7,7 +7,7 @@ import {MaterialBuilder} from "../../vox/engine/material/MaterialBuilder";
 import {SphereEntity} from "../../vox/engine/entity/SphereEntity";
 
 import {Engine} from "../../vox/engine/Engine";
-import {EngineInstance} from "../../vox/engine/EngineInstance";
+import {RendererInstance} from "../../vox/engine/RendererInstance";
 import { TextureProxy } from "../../vox/engine/texture/TextureProxy";
 
 class SphereObject {
@@ -19,7 +19,7 @@ class SphereObject {
     private m_pos: Vector3D = new Engine.Vector3D();
     constructor(){}
 
-    initialize(engine: EngineInstance, materialBuilder: MaterialBuilder, texture: TextureProxy = null, rpIndex: number = 0): void {
+    initialize(engine: RendererInstance, materialBuilder: MaterialBuilder, texture: TextureProxy = null, rpIndex: number = 0): void {
 
         console.log("SphereObject::initialize()...");
         if(SphereObject.s_tex == null) {

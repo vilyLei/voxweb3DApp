@@ -117,6 +117,7 @@ export class ModuleLoader {
         };
         codeLoader.onload = () => {
             
+            console.log("loaded jsModule, purl: ", purl);
             this.m_uiManager.showLoaded();
 
             let scriptEle: HTMLScriptElement = document.createElement("script");

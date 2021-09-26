@@ -1,13 +1,15 @@
 
 import {RendererContext} from "../../vox/engine/render/RendererContext";
 import {Renderer} from "../../vox/engine/render/Renderer";
+import {IEngine} from "./IEngine";
 /**
  * Engine system face.
  */
 class Engine {
 
-    private static s_renderer: Renderer = null;
     private static s_rcontext: RendererContext = null;
+    private static s_renderer: Renderer = null;
+    private static s_engine: IEngine = null;
 
     // recorde the rednerer engine core class ------------- begin.
     static readonly RendererDevice: any;
@@ -47,11 +49,14 @@ class Engine {
         return Engine.RendererDevice.IsWebGL2();
     }
 
+    static GetRendererContext(): RendererContext {
+        return Engine.s_rcontext;
+    }
     static GetRenderer(): Renderer {
         return Engine.s_renderer;
     }
-    static GetRendererContext(): RendererContext {
-        return Engine.s_rcontext;
+    static GetEngine(): IEngine {
+        return Engine.s_engine;
     }
     static SetDebugEnabled(enabled: boolean): void {
         
@@ -68,25 +73,26 @@ class Engine {
 
             let mainModule: any = pmodule["mainModule"];
             let engine: any = Engine;
+            
             engine.s_renderer = mainModule.getRenderer() as Renderer;
             engine.s_rcontext = mainModule.getRendererContext() as RendererContext;
+            if(pmodule["vox3DEngine"] != null) {
+                engine.s_engine = mainModule.getEngine();
+            }
             
             engine.MathConst = pmodule.MathConst;
             engine.Vector3D = pmodule.Vector3D;
             engine.Color4 = pmodule.Color4;
             engine.Matrix4 = pmodule.Matrix4;
-            engine.AABB = pmodule.AABB;            
+            engine.AABB = pmodule.AABB;
             engine.Camera = pmodule.CameraBase;
 
             engine.RendererDevice = pmodule.RendererDevice;
 
             engine.ImageTextureProxy = pmodule.ImageTextureProxy;
-            engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             
             engine.DataMesh = pmodule.DataMesh;
             engine.DracoMesh = pmodule.DracoMesh;
-
-            engine.Entity = pmodule.DisplayEntity;
 
             engine.Entity = pmodule.DisplayEntity;
             engine.AxisEntity = pmodule.Axis3DEntity;

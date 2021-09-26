@@ -1,5 +1,5 @@
 
-import {EngineInstance} from "../../vox/engine/EngineInstance";
+import {RendererInstance} from "../../vox/engine/RendererInstance";
 
 import {CameraCtrl} from "../../common/ctrl/CameraCtrl";
 import {IScene} from "../../common/scene/IScene";
@@ -10,12 +10,12 @@ import {PrimitivesScene} from "./PrimitivesScene";
  */
 class Scene implements IScene{
 
-    private m_engine: EngineInstance = null;
+    private m_engine: RendererInstance = null;
     private m_camTrack: CameraCtrl = null;
     private m_subScene: IScene = new PrimitivesScene();
     constructor() { }
 
-    initialize(engine: EngineInstance): void {
+    initialize(engine: RendererInstance): void {
 
         if(this.m_engine == null) {
 

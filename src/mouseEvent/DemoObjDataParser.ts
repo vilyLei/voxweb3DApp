@@ -1,5 +1,5 @@
 import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
-import { EngineInstance } from "../vox/engine/EngineInstance";
+import { RendererInstance } from "../vox/engine/RendererInstance";
 import { IDataMesh } from "../vox/engine/mesh//IDataMesh";
 import { Engine } from "../vox/engine/Engine";
 import { AppBase } from "../vox/app/AppBase";
@@ -13,7 +13,7 @@ import { IDemoModule } from "./IDemoModule";
 class DemoObjDataParser extends AppBase implements IDemoModule{
 
     private m_initFlag: boolean = true;
-    private m_engine: EngineInstance = new EngineInstance();
+    private m_engine: RendererInstance = new RendererInstance();
     private m_tex: ImageTextureProxy;
 
     private m_moduleFlag: boolean = true;

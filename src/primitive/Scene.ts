@@ -3,7 +3,7 @@ import { IScene } from "../common/scene/IScene";
 
 import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
 import { Engine } from "../vox/engine/Engine";
-import { EngineInstance } from "../vox/engine/EngineInstance";
+import { RendererInstance } from "../vox/engine/RendererInstance";
 import { AxisEntity } from "../vox/engine/entity/AxisEntity";
 import { PlaneEntity } from "../vox/engine/entity/PlaneEntity";
 import { BoxEntity } from "../vox/engine/entity/BoxEntity";
@@ -20,12 +20,12 @@ import { LineEntity } from "../vox/engine/entity/LineEntity";
  */
 class Scene implements IScene {
 
-    private m_engine: EngineInstance = null;
+    private m_engine: RendererInstance = null;
     private m_camTrack: CameraCtrl = null;
     
     constructor() { }
 
-    initialize(engine: EngineInstance): void {
+    initialize(engine: RendererInstance): void {
 
         if (this.m_engine == null) {
 

@@ -6,10 +6,11 @@ class URLManager {
     private m_devTestEnv: boolean = true;
     private m_moduleEnabled: boolean = true;
     private m_appModuleName: string = "";
-    private m_urlsObj: any = {
-        "baseRenderer": "static/code/engine/baseRenderer.js",
-        "roFunctions": "static/code/engine/roFunctions.js"
-    };
+    private m_urlsObj: any = {};
+    //private m_urlsObj: any = {
+    //    "baseRenderer": "static/code/engine/baseRenderer.js",
+    //    "roFunctions": "static/code/engine/roFunctions.js"
+    //};
     private m_moduleNameList: string[] = [
         "baseRenderer",
         "roFunctions"
@@ -22,7 +23,13 @@ class URLManager {
     private m_loadIndex: number = 0;
     private m_loadedIndex: number = 0;
     constructor() { }
-
+    
+    setModuleNameAt(i: number, ns: string): void {
+        this.m_moduleNameList[i] = ns;
+    }
+    setModuleClassNameAt(i: number, ns: string): void {
+        this.m_moduleClassNameList[i] = ns;
+    }
     getIndex(): number {
         return this.m_loadIndex;
     }
@@ -43,7 +50,11 @@ class URLManager {
     }
     getModuleUrl(): string {
         let ns: string = this.m_moduleNameList[this.m_loadIndex];
-        return this.m_urlsObj[ns];
+        if(this.m_urlsObj[ns] != null) {
+            return this.m_urlsObj[ns];
+        }
+        let url: string = "static/code/engine/" + ns + ".js";
+        return url;
     }
     useNext(): void {
         this.m_loadIndex ++;

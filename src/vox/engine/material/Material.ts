@@ -9,7 +9,7 @@ interface Material {
     getBufSortFormat():number;
     getShdUniqueName():string;
     initializeByCodeBuf(texEnabled:boolean):void;
-    setTextureList(texList: TextureProxy[]): void
+    setTextureList(texList: TextureProxy[]): void;
     setTextureAt(index: number, tex: TextureProxy): void;
     getTextureList(): TextureProxy[];
     getTextureAt(index: number): TextureProxy;

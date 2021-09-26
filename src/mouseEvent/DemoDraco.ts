@@ -1,5 +1,5 @@
 import { ImageTextureProxy } from "../vox/engine/texture/ImageTextureProxy";
-import { EngineInstance } from "../vox/engine/EngineInstance";
+import { RendererInstance } from "../vox/engine/RendererInstance";
 import { IDataMesh } from "../vox/engine/mesh//IDataMesh";
 import { Engine } from "../vox/engine/Engine";
 import { AppBase } from "../vox/app/AppBase";
@@ -20,7 +20,7 @@ import { CameraCtrl } from "../common/ctrl/CameraCtrl";
 class DemoDraco extends AppBase implements IDemoModule, DracoTaskListener{
 
     private m_initFlag: boolean = true;
-    private m_engine: EngineInstance = new EngineInstance();
+    private m_engine: RendererInstance = new RendererInstance();
     private m_tex: ImageTextureProxy;
 
     private m_texList: ImageTextureProxy[] = [];
@@ -46,11 +46,10 @@ class DemoDraco extends AppBase implements IDemoModule, DracoTaskListener{
     }
     private loadedModuleData(modules: any, scale: number): void {
 
-        console.log("data: ",modules);
         let materialWrrapper: ParallaxMapLightWrapper = new ParallaxMapLightWrapper(this.m_lightParam);
         //let materialWrrapper: NormalMapLightWrapper = new NormalMapLightWrapper(this.m_lightParam);
-        materialWrrapper.getMaterial().initializeByCodeBuf( true );
-        materialWrrapper.getMaterial().setTextureList( this.m_texList );
+        materialWrrapper.initializeByCodeBuf( true );
+        materialWrrapper.setTextureList( this.m_texList );
 
         let color: Color4 = new Engine.Color4();
         color.normalizeRandom(2.0);
@@ -58,7 +57,7 @@ class DemoDraco extends AppBase implements IDemoModule, DracoTaskListener{
 
         let dracoMesh: IDracoMesh = new Engine.DracoMesh();
         
-        dracoMesh.setBufSortFormat(materialWrrapper.getMaterial().getBufSortFormat());
+        dracoMesh.setBufSortFormat(materialWrrapper.getBufSortFormat());
         dracoMesh.initialize(modules);
 
         //let scale: number = 3;

@@ -1,12 +1,12 @@
 
-import {EngineInstance} from "../../vox/engine/EngineInstance";
+import {RendererInstance} from "../../vox/engine/RendererInstance";
 
 /**
  * define the app demo cene behavior
  */
 interface IScene {
 
-    initialize(engine: EngineInstance): void;
+    initialize(engine: RendererInstance): void;
     run(): void;
 }
 

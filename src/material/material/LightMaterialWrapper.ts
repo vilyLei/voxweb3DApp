@@ -1,15 +1,13 @@
 import {ShdCodeMaterial} from "../../vox/engine/material/ShdCodeMaterial";
 import {ShaderUniformData} from "../../vox/engine/material/ShaderUniformData";
+import {IMaterialWrapper} from "../../vox/engine/material/IMaterialWrapper";
 import {Engine} from "../../vox/engine/Engine";
-
-import {Vector3D} from "../../vox/engine/math/Vector3D";
-import {Matrix4} from "../../vox/engine/math/Matrix4";
-import {Color4} from "../../vox/engine/material/Color4";
+import { TextureProxy } from "../../vox/engine/texture/TextureProxy";
 
 import {LightShdWrapper} from "./LightShdWrapper";
 import {DirecLightParam} from "./DirecLightParam";
 
-class LightMaterialWrapper {
+class LightMaterialWrapper implements IMaterialWrapper {
 
     static readonly shaderWrapper: LightShdWrapper = new LightShdWrapper();
 
@@ -32,9 +30,6 @@ class LightMaterialWrapper {
         this.m_material.setSelfUniformData(uniformData);
         this.m_material.setSharedUniformsData(this.m_lightParam.lightUniformDataList);
     }
-    getMaterial(): ShdCodeMaterial {
-        return this.m_material;
-    }
     setRGBColor3f(r: number, g: number, b: number): void {
         this.m_colorData[0] = r;
         this.m_colorData[1] = g;
@@ -45,6 +40,19 @@ class LightMaterialWrapper {
         this.m_colorData[1] = g;
         this.m_colorData[2] = b;
         this.m_colorData[4] = a;
+    }
+    
+    initializeByCodeBuf(texEnabled:boolean):void {
+        this.m_material.initializeByCodeBuf( texEnabled );
+    }
+    getMaterial(): ShdCodeMaterial {
+        return this.m_material;
+    }
+    setTextureList(texList: TextureProxy[]): void {
+        this.m_material.setTextureList( texList );
+    }
+    getBufSortFormat(): number {
+        return this.m_material.getBufSortFormat();
     }
 }
 export {LightMaterialWrapper};

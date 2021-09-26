@@ -16,6 +16,11 @@
     "dev_box": "vue-cli-service serve --voxtype=box",
     "build_box": "vue-cli-service build --target lib --name VoxApp --dest dist/box ./src/box/compile/devApp.ts",
 
+    
+    "dev_minEngine": "vue-cli-service serve --voxtype=minEngine",
+    "build_minEngine": "vue-cli-service build --target lib --name VoxApp --dest dist/minEngine ./src/minEngine/compile/devApp.ts",
+    "build_minEngine_app": "vue-cli-service build --target lib --name VoxApp --dest dist/minEngineApp ./src/minEngine/compile/dev.ts",
+
     "dev_primitive": "vue-cli-service serve --voxtype=primitive",
     "build_primitive": "vue-cli-service build --target lib --name VoxApp --dest dist/primitive ./src/primitive/compile/devApp.ts",
 
