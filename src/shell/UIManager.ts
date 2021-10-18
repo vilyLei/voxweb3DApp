@@ -81,7 +81,6 @@ export class UIManager {
         if (this.m_infoDiv == null) {
             this.m_infoDiv = document.createElement('div');
             this.m_infoDiv.style.backgroundColor = "rgba(255,255,255,0.3)";
-            let btn: any = this.m_button;
             this.m_infoDiv.style.color = "#0099cc";
             this.elementCenter(this.m_infoDiv);
             this.m_bodyDiv.appendChild(this.m_infoDiv);           
