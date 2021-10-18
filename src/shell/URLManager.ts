@@ -7,10 +7,6 @@ class URLManager {
     private m_moduleEnabled: boolean = true;
     private m_appModuleName: string = "";
     private m_urlsObj: any = {};
-    //private m_urlsObj: any = {
-    //    "baseRenderer": "static/code/engine/baseRenderer.js",
-    //    "roFunctions": "static/code/engine/roFunctions.js"
-    //};
     private m_moduleNameList: string[] = [
         "baseRenderer",
         "roFunctions"

@@ -13,9 +13,9 @@ import { DracoMeshRawBuilder } from "./draco/DracoMeshRawBuilder";
 import { BoxEntity } from "../../vox/engine/entity/BoxEntity";
 import { EntityObject } from "../../vox/engine/entity/EntityObject";
 
-import { DirecLightParam } from "../../material/material/DirecLightParam";
-import { NormalMapLightWrapper } from "../../material/material/NormalMapLightWrapper";
-import { ParallaxMapLightWrapper } from "../../material/material/ParallaxMapLightWrapper";
+import { DirecLightParam } from "../../renderer/material/material/DirecLightParam";
+import { NormalMapLightWrapper } from "../../renderer/material/material/NormalMapLightWrapper";
+import { ParallaxMapLightWrapper } from "../../renderer/material/material/ParallaxMapLightWrapper";
 import { IDracoMesh } from "../../vox/engine/mesh/IDracoMesh";
 import { CameraCtrl } from "../../common/ctrl/CameraCtrl";
 

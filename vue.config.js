@@ -2,7 +2,7 @@ const path = require('path');
 const resolve = dir => path.join(__dirname, dir);
 const { ENV = '' } = process.env;
 //console.log("process.env: ",process.env);
-console.log("process.env: ",process.env.npm_lifecycle_script);
+console.log("process.env: ", process.env.npm_lifecycle_script);
 let devDstStr = "./src/main.ts";
 let appDstStr = "./src/main.ts";
 
@@ -10,16 +10,15 @@ let keyStr = "--voxtype=";
 let compileParam = process.env.npm_lifecycle_script + "";
 let keyIndx = compileParam.indexOf(keyStr);
 compileParam = compileParam.slice(keyIndx + keyStr.length);
-console.log("compileParam: ",compileParam);
+console.log("compileParam: ", compileParam);
 //if(process.env.npm_lifecycle_script == "vue-cli-service serve --voxtype=dev")
-if(keyIndx > 0 && compileParam != "")
-{
-  if(compileParam.indexOf("_") > 0) {
+if (keyIndx > 0 && compileParam != "") {
+  if (compileParam.indexOf("_") > 0) {
     let arr = compileParam.split("_");
-    devDstStr = "./src/"+arr[0]+"/"+arr[1]+"/compile/dev.ts";
+    devDstStr = "./src/" + arr[0] + "/" + arr[1] + "/compile/dev.ts";
   }
   else {
-    devDstStr = "./src/"+compileParam+"/compile/dev.ts";
+    devDstStr = "./src/" + compileParam + "/compile/dev.ts";
   }
   appDstStr = devDstStr;
 }
@@ -51,7 +50,7 @@ module.exports = {
 
   devServer: {
     port: 9000,
-    disableHostCheck:true
+    disableHostCheck: true
     // https:true
   },
 
