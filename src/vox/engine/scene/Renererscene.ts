@@ -15,7 +15,6 @@ class RendererScene implements IRendererScene{
     private m_rcontext: RendererContext = null;
     private m_rscene: IRendererScene = null;
     constructor() {
-        console.log("RendererScene::constructor()....");
     }
     getUid(): number {
         return this.m_rscene.getUid();
@@ -25,7 +24,6 @@ class RendererScene implements IRendererScene{
             this.m_rscene = scene;
             this.m_renderer = Engine.GetRenderer();
             this.m_rcontext = Engine.GetRendererContext();
-            //this.m_rscene = Engine.GetEngine().rscene;
         }
     }
 
@@ -46,17 +44,17 @@ class RendererScene implements IRendererScene{
      * @param captureEnabled the default value is true
      * @param bubbleEnabled the default value is false
      */
-     addEventListener(type: number, target: any, func: (evt: any) => void, captureEnabled: boolean = true, bubbleEnabled: boolean = false): void {
-        this.m_rscene.addEventListener(type, target, func, captureEnabled, bubbleEnabled);
-     }
-     /**
-      * @param type event type
-      * @param target event listerner
-      * @param func event listerner callback function
-      */
-     removeEventListener(type: number, target: any, func: (evt: any) => void): void {
+    addEventListener(type: number, target: any, func: (evt: any) => void, captureEnabled: boolean = true, bubbleEnabled: boolean = false): void {
+       this.m_rscene.addEventListener(type, target, func, captureEnabled, bubbleEnabled);
+    }
+    /**
+     * @param type event type
+     * @param target event listerner
+     * @param func event listerner callback function
+     */
+    removeEventListener(type: number, target: any, func: (evt: any) => void): void {
         this.m_rscene.removeEventListener(type, target, func);
-     }
+    }
     isRayPickSelected(): boolean {
         return this.m_rscene.isRayPickSelected();
     }

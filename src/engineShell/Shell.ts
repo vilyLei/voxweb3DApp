@@ -41,17 +41,15 @@ export class Shell {
         let pwindow: any = window;
         var VoxCore = pwindow.VoxCore;
         console.log("module build success, module name,className: ",module_ns,className, "VoxCore[className] != null: ",VoxCore[className] != null);
-        if(module_ns != "baseRenderer" && VoxCore[className] != null) {
+        if(module_ns != "engine" && VoxCore[className] != null) {
 
-            let noduleIns: IApp = new VoxCore[className]() as IApp;
-            
-            //this.m_sysModules.push( noduleIns );
+            let noduleIns: IApp = new VoxCore[className]() as IApp;            
             this.m_moduleManager.addSystemModule( noduleIns, module_ns );
-
-            let initEnabled: boolean = this.m_urlManager.isLoadFinish();
-            if( initEnabled ) {
-                this.initModules(VoxCore);
-            }
+        }
+        let initEnabled: boolean = this.m_urlManager.isLoadFinish();
+        console.log("XXX initEnabled: ",initEnabled);
+        if( initEnabled ) {
+            this.initModules(VoxCore);
         }
         
         this.m_loadFlag = true;
@@ -76,14 +74,18 @@ export class Shell {
 
         this.m_moduleLoader.loadFinish();
 
-        let mainModule = new module["baseRenderer"]();
+        
+        let Engine:any = module["VoxAppEngine"];
+        Engine.InitializeClass();
+
+        let mainModule = new module["vox3DEngine"]();
+        if(this.m_appModule != null) {
+            mainModule.setParam( this.m_appModule.getRendererParam() );
+        }
         mainModule.initialize(module);
         module["mainModule"] = mainModule;
         this.m_module = mainModule;
-
-        let Engine:any = module["VoxAppEngine"];
         if(Engine != null) {
-            Engine.InitializeClass();
             Engine.Initialize();
         }
         this.m_moduleManager.initializeModules();
@@ -148,10 +150,8 @@ export class Shell {
         if(this.m_module != null) {
             let modules: IApp[] = this.m_moduleManager.getSystemModules();
             let len: number = modules.length;
-            if(len > 1) {
-                for(let i: number = 0; i < len; ++i) {
-                    modules[i].run();
-                }
+            for(let i: number = 0; i < len; ++i) {
+                modules[i].run();
             }
         }
     }

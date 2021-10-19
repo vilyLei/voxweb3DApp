@@ -1,6 +1,7 @@
 
 import {RendererContext} from "../../vox/engine/render/RendererContext";
 import {Renderer} from "../../vox/engine/render/Renderer";
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 import {IEngine} from "./IEngine";
 /**
  * Engine system face.
@@ -21,6 +22,7 @@ class Engine {
     static readonly AABB: any;
     static readonly Camera: any;
 
+    static readonly RendererParam: any;
     static readonly DataMesh: any;
     static readonly DracoMesh: any;
 
@@ -37,9 +39,12 @@ class Engine {
     static readonly BoxFrameEntity: any;
     static readonly FrustrumFrameEntity: any;
 
+    static readonly ShaderUniformProbe: any;
+
     static readonly ShaderCodeMaterial: any;
     static readonly ShaderUniformData: any;
-
+    static readonly ShaderGlobalUniform: any;
+    static readonly UniformConst: any;
     // recorde the rednerer engine core class ------------- end.
     
     static IsWebGL1(): boolean {
@@ -64,7 +69,56 @@ class Engine {
         if(enabled) {
         }
     }
+    static CreateRendererParam(div: HTMLDivElement): RendererParam {
+        let param: RendererParam = new Engine.RendererParam( div );
+        return param;
+    }
     
+    static InitializeClass(): void {
+        
+        var pwindow: any = window;
+        let pmodule: any = pwindow["VoxCore"];
+
+        if(Engine.MathConst == null) {
+
+            let engine: any = Engine;
+            
+            engine.MathConst = pmodule.MathConst;
+            engine.Vector3D = pmodule.Vector3D;
+            engine.Color4 = pmodule.Color4;
+            engine.Matrix4 = pmodule.Matrix4;
+            engine.AABB = pmodule.AABB;
+            engine.Camera = pmodule.CameraBase;
+
+            engine.RendererDevice = pmodule.RendererDevice;
+            
+            engine.ImageTextureProxy = pmodule.ImageTextureProxy;
+            
+            engine.RendererParam = pmodule.RendererParam;
+
+            engine.DataMesh = pmodule.DataMesh;
+            engine.DracoMesh = pmodule.DracoMesh;
+
+            engine.Entity = pmodule.DisplayEntity;
+            engine.AxisEntity = pmodule.Axis3DEntity;
+            engine.PlaneEntity = pmodule.Plane3DEntity;
+            engine.BoxEntity = pmodule.Box3DEntity;
+            engine.SphereEntity = pmodule.Sphere3DEntity;
+            engine.CylinderEntity = pmodule.Cylinder3DEntity;
+            engine.BillboardEntity = pmodule.Billboard3DEntity;
+            engine.LineEntity = pmodule.Line3DEntity;
+            engine.DashedLineEntity = pmodule.DashedLine3DEntity;
+            engine.BoxFrameEntity = pmodule.BoxFrame3D;
+            engine.FrustrumFrameEntity = pmodule.FrustrumFrame3DEntity;
+
+            engine.ShaderUniformProbe = pmodule.ShaderUniformProbe;
+            
+            engine.ShaderCodeMaterial = pmodule.ShaderCodeMaterial;
+            engine.ShaderUniformData = pmodule.ShaderUniformData;
+            engine.ShaderGlobalUniform = pmodule.ShaderGlobalUniform;
+            engine.UniformConst = pmodule.UniformConst;
+        }
+    }
     static Initialize(): void {
         var pwindow: any = window;
         let pmodule: any = pwindow["VoxCore"];
@@ -79,7 +133,7 @@ class Engine {
             if(pmodule["vox3DEngine"] != null) {
                 engine.s_engine = mainModule.getEngine();
             }
-            
+            /*
             engine.MathConst = pmodule.MathConst;
             engine.Vector3D = pmodule.Vector3D;
             engine.Color4 = pmodule.Color4;
@@ -91,6 +145,8 @@ class Engine {
 
             engine.ImageTextureProxy = pmodule.ImageTextureProxy;
             
+            engine.RendererParam = pmodule.RendererParam;
+
             engine.DataMesh = pmodule.DataMesh;
             engine.DracoMesh = pmodule.DracoMesh;
 
@@ -108,7 +164,7 @@ class Engine {
             
             engine.ShaderCodeMaterial = pmodule.ShaderCodeMaterial;
             engine.ShaderUniformData = pmodule.ShaderUniformData;
-            
+            //*/
             // // for test
             // let shaderCodeMaterialIns = new Engine.ShaderCodeMaterial();
             // console.log("shaderCodeMaterialIns: ",shaderCodeMaterialIns);

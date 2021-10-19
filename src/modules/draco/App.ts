@@ -5,6 +5,7 @@ import { ThreadSystemModule } from "./core/ThreadSystemModule";
 import { ThreadSystemTask } from "../../vox/engine/thread/ThreadSystemTask";
 import { DracoTaskListener } from "../../vox/engine/draco/DracoTaskListener";
 import { DracoMeshRawBuilder } from "./draco/DracoMeshRawBuilder";
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 
 //  import { DeomScene } from "./DeomScene";
 
@@ -81,6 +82,9 @@ class App extends AppBase implements IApp {
             this.load(url);
             //*/
         }
+    }
+    getRendererParam(): RendererParam {
+        return null;
     }
     getTaskClassId(): number {
         return this.m_dracoMeshBuilder.getTaskClassId();

@@ -5,7 +5,8 @@
 /*  Vily(vily313@126.com)                                                  */
 /*                                                                         */
 /***************************************************************************/
-
+import {IAbstractShader} from "./IAbstractShader";
+import {IUniformParam} from "./IUniformParam";
 export default interface IShdBuilder {
     
     normalMapEanbled: boolean;
@@ -23,7 +24,9 @@ export default interface IShdBuilder {
     addFragOutput(type: string, name: string): void;
     addVarying(type: string, name: string): void;
     addVertUniform(type: string, name: string, arrayLength: number): void;
+    addVertUniformParam(unifromParam: IUniformParam): void;
     addFragUniform(type: string, name: string, arrayLength: number): void;
+    addFragUniformParam(unifromParam: IUniformParam): void;
     addFragFunction(codeBlock: string): void;
     addVertFunction(codeBlock: string): void;
     useTexturePreciseHighp(): void;
@@ -42,6 +45,8 @@ export default interface IShdBuilder {
     addVertMainCode(code: string): void;
     addFragHeadCode(code: string): void;
     addFragMainCode(code: string): void;
+    addShaderObject(shaderObj: IAbstractShader): void;
+    addShaderObjectHead(shaderObj: IAbstractShader): void;
 
     buildFragCode(): string;
     buildVertCode(): string

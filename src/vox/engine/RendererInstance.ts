@@ -2,7 +2,7 @@
 import { RendererContext } from "../../vox/engine/render/RendererContext";
 import { Renderer } from "../../vox/engine/render/Renderer";
 import { IEntityObject } from "../../vox/engine/entity/IEntityObject";
-
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 import { Engine } from "./Engine";
 import { Camera } from "./view/Camera";
 
@@ -15,6 +15,9 @@ class RendererInstance {
         console.log("RendererInstance::constructor()....");
     }
 
+    createRendererParam(div: HTMLDivElement): RendererParam {
+        return Engine.CreateRendererParam( div );
+    }
     initialize(): void {
         if(this.m_renderer == null) {
             this.m_renderer = Engine.GetRenderer();

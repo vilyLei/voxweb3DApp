@@ -12,7 +12,7 @@ class NormalMapLightShdWrapper implements IShdWrapper {
 
     }
     buildThisCode(codeBuilder: IShdBuilder): void {
-
+        
     }
     getFragShaderCode(codeBuilder: IShdBuilder): string {
 

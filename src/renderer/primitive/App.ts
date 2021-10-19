@@ -1,6 +1,7 @@
 import { ImageTextureProxy } from "../../vox/engine/texture/ImageTextureProxy";
 import { RendererInstance } from "../../vox/engine/RendererInstance";
 import { Engine } from "../../vox/engine/Engine";
+import { RendererParam } from "../../vox/engine/scene/RendererParam";
 import { Scene } from "./Scene";
 import { IApp } from "../../vox/app/IApp";
 import { AppBase } from "../../vox/app/AppBase";
@@ -32,6 +33,10 @@ class App extends AppBase implements IApp {
             this.m_scene = new Scene();
             this.m_scene.initialize( this.m_engine );
         }
+    }
+
+    getRendererParam(): RendererParam {
+        return this.m_engine.createRendererParam( null );
     }
 
     /**

@@ -18,6 +18,7 @@ import { NormalMapLightWrapper } from "../../renderer/material/material/NormalMa
 import { ParallaxMapLightWrapper } from "../../renderer/material/material/ParallaxMapLightWrapper";
 import { IDracoMesh } from "../../vox/engine/mesh/IDracoMesh";
 import { CameraCtrl } from "../../common/ctrl/CameraCtrl";
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 
 //import { BoxEntity } from "../../vox/engine/entity/BoxEntity";
 
@@ -221,6 +222,9 @@ class DeomScene extends AppBase implements IApp,DracoTaskListener{
         }
     }
 
+    getRendererParam(): RendererParam {
+        return this.m_engine.createRendererParam( null );
+    }
     /**
      * running per frame
      */
@@ -228,8 +232,8 @@ class DeomScene extends AppBase implements IApp,DracoTaskListener{
         
         if (this.m_engine != null) {
 
-            this.m_degY += 1.0;
-            this.m_degZ += 0.5;
+            this.m_degY += 0.2;
+            this.m_degZ += 0.1;
             //  this.m_box.setRotationXYZ(0.0, this.m_degY, this.m_degZ);
             //  this.m_box.update();
             if (this.m_camTrack != null) {

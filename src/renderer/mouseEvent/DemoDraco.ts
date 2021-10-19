@@ -25,8 +25,10 @@ class DemoDraco extends AppBase implements IDemoModule, DracoTaskListener{
 
     private m_texList: ImageTextureProxy[] = [];
     private m_lightParam: DirecLightParam = null;
-    private m_moduleFlag: boolean = true;    
+
+    private m_moduleFlag: boolean = true;
     private m_module: any = null;
+    
     private m_camTrack: CameraCtrl = null;
     private m_scale: number = 2.0;
 

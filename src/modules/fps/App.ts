@@ -1,5 +1,6 @@
 import { IApp } from "../../vox/app/IApp";
 import { AppBase } from "../../vox/app/AppBase";
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 
 
 class CanvasFPSViewer
@@ -130,6 +131,9 @@ class App extends AppBase implements IApp{
             this.m_initFlag = false;
             this.m_fpsViewer.initialize();
         }
+    }
+    getRendererParam(): RendererParam {
+        return null;
     }
 
     /**

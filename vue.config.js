@@ -18,6 +18,14 @@ if (keyIndx > 0 && compileParam != "") {
     devDstStr = "./src/" + arr[0] + "/" + arr[1] + "/compile/dev.ts";
   }
   else {
+    // switch(compileParam) {
+    //   case "engineShell":
+    //     devDstStr = "./src/" + compileParam + "/compile/dev.ts";
+    //     break;
+    //   default:
+    //     devDstStr = "./src/" + compileParam + "/compile/dev.ts";
+    //     break;
+    // }
     devDstStr = "./src/" + compileParam + "/compile/dev.ts";
   }
   appDstStr = devDstStr;

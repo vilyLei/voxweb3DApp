@@ -10,12 +10,17 @@
     "dev": "vue-cli-service serve --voxtype=shell",
     "build": "vue-cli-service build --target lib --name VoxApp --dest dist/shell ./src/shell/compile/dev.ts",
 
+    "devengine": "vue-cli-service serve --voxtype=engineShell",
+    "buildengine": "vue-cli-service build --target lib --name VoxApp --dest dist/shell ./src/engingShell/compile/dev.ts",
+
+    "dev_engine_demoPrimitive": "vue-cli-service serve --voxtype=engine_demoPrimitive",
+    "build_engine_demoPrimitive": "vue-cli-service build --target lib --name VoxApp --dest dist/demoPrimitive ./src/engine/demoPrimitive/compile/devApp.ts",
+
     "dev_renderer_playerOne": "vue-cli-service serve --voxtype=renderer_playerOne",
     "build_renderer_playerOne": "vue-cli-service build --target lib --name VoxApp --dest dist/playerOne ./src/renderer/playerOne/compile/devApp.ts",
     
     "dev_renderer_box": "vue-cli-service serve --voxtype=renderer_box",
     "build_renderer_box": "vue-cli-service build --target lib --name VoxApp --dest dist/box ./src/renderer/box/compile/devApp.ts",
-
     
     "dev_renderer_minEngine": "vue-cli-service serve --voxtype=renderer_minEngine",
     "build_renderer_minEngine": "vue-cli-service build --target lib --name VoxApp --dest dist/minEngine ./src/renderer/minEngine/compile/devApp.ts",
@@ -30,7 +35,7 @@
     "dev_renderer_mouseEvent": "vue-cli-service serve --voxtype=renderer_mouseEvent",
     "build_renderer_mouseEvent": "vue-cli-service build --target lib --name VoxApp --dest dist/mouseEvent ./src/renderer/mouseEvent/compile/devApp.ts",
   
-    "dev_renderer_material": "vue-cli-service serve --voxtype=material",
+    "dev_renderer_material": "vue-cli-service serve --voxtype=renderer_material",
     "build_renderer_material": "vue-cli-service build --target lib --name VoxApp --dest dist/material ./src/renderer/material/compile/devApp.ts",
     
     "dev_thread": "vue-cli-service serve --voxtype=thread",

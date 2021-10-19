@@ -1,5 +1,6 @@
 import { IApp } from "../vox/app/IApp";
 import { AppBase } from "../vox/app/AppBase";
+import { RendererParam } from "../vox/engine/scene/RendererParam";
 /**
  * A 3D APP Box view Demo
  */
@@ -14,7 +15,9 @@ class App extends AppBase implements IApp{
             console.log("oscillator module initilaize....");
         }
     }
-
+    getRendererParam(): RendererParam {
+        return null;
+    }
     /**
      * running per frame
      */

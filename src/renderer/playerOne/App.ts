@@ -1,4 +1,5 @@
 import {RendererInstance} from "../../vox/engine/RendererInstance";
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 import {Scene} from "./scene/Scene";
 import { IApp } from "../../vox/app/IApp";
 import { AppBase } from "../../vox/app/AppBase";
@@ -25,6 +26,9 @@ class App extends AppBase implements IApp{
         }
     }
 
+    getRendererParam(): RendererParam {
+        return this.m_engine.createRendererParam( null );
+    }
     /**
      * running per frame
      */

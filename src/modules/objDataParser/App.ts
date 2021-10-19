@@ -1,6 +1,7 @@
 import { IApp } from "../../vox/app/IApp";
 import { AppBase } from "../../vox/app/AppBase";
 import { ObjDataParser } from "./ObjDataParser";
+import {RendererParam} from "../../vox/engine/scene/RendererParam";
 /*
 // for example
 import { ImageTextureProxy } from "../../vox/engine/texture/ImageTextureProxy";
@@ -121,6 +122,9 @@ class App extends AppBase implements IApp{
         }
     }
 
+    getRendererParam(): RendererParam {
+        return null;
+    }
     /**
      * running per frame
      */
